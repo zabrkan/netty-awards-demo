@@ -2,7 +2,7 @@
 window.NETTY_DATA = {
  "built": "2026-07-10",
  "window": {
-  "since": "2025-07-10",
+  "since": "2025-09-01",
   "until": "2026-07-10"
  },
  "source": "Metabase: facebook.video x public.nm_pages_genres, top views",
@@ -80,7 +80,7 @@ window.NETTY_DATA = {
    "icon": "😱",
    "accent": "#8c6cff",
    "genre": "Reaction",
-   "totalViews": 194300000,
+   "totalViews": 156700000,
    "nominees": [
     {
      "id": "927818256286590",
@@ -94,48 +94,48 @@ window.NETTY_DATA = {
      "date": "2026-03-14"
     },
     {
-     "id": "1091472695784089",
+     "id": "1985788938864744",
+     "page": "108866260944459",
+     "title": "Obsessed Ex Wife Stalks Husband NONSTOP, Gets Her Window Smashed After Running Into a Cop…",
+     "creator": "Imperfect Crimes",
+     "views": 26400000,
+     "len": "15:26",
+     "reel": false,
+     "link": "https://facebook.com/1985788938864744",
+     "date": "2025-10-01"
+    },
+    {
+     "id": "1279856750894868",
+     "page": "106777484966247",
+     "title": "Daughter Sues Mother After Savings Are Transferred Without Her Knowledge!",
+     "creator": "Zech Plays",
+     "views": 24000000,
+     "len": "21:22",
+     "reel": false,
+     "link": "https://facebook.com/1279856750894868",
+     "date": "2026-06-11"
+    },
+    {
+     "id": "2215555385605653",
      "page": "101169853065216",
-     "title": "This caretaker got caught on camera!",
+     "title": "Sleeping girl gets a rude Awakening",
      "creator": "Chaos Crew",
-     "views": 44300000,
-     "len": "0:34",
+     "views": 23300000,
+     "len": "3:59",
      "reel": false,
-     "link": "https://facebook.com/1091472695784089",
-     "date": "2025-08-05"
+     "link": "https://facebook.com/2215555385605653",
+     "date": "2025-10-23"
     },
     {
-     "id": "772342755328222",
-     "page": "104107681407415",
-     "title": "I can already hear it!",
-     "creator": "Brandon J McDermott",
-     "views": 30900000,
-     "len": "0:06",
+     "id": "1461211929005656",
+     "page": "216681481525813",
+     "title": "Squatter Thinks She Knows The Law! 😳🤣 She's trying to steal a $575,000.00 house!",
+     "creator": "Steve Js Short Cuts",
+     "views": 21700000,
+     "len": "21:12",
      "reel": false,
-     "link": "https://facebook.com/772342755328222",
-     "date": "2025-08-04"
-    },
-    {
-     "id": "2029779607826920",
-     "page": "106777484966247",
-     "title": "Woman Sues Friend for Exposing Her Affair to Her Husband!",
-     "creator": "Zech Plays",
-     "views": 29300000,
-     "len": "20:07",
-     "reel": false,
-     "link": "https://facebook.com/2029779607826920",
-     "date": "2025-07-24"
-    },
-    {
-     "id": "736489532334591",
-     "page": "106777484966247",
-     "title": "Man Questions Paternity of Twin Sons Because He Thinks They’re Too Ugly to Be His!",
-     "creator": "Zech Plays",
-     "views": 28500000,
-     "len": "23:07",
-     "reel": false,
-     "link": "https://facebook.com/736489532334591",
-     "date": "2025-07-26"
+     "link": "https://facebook.com/1461211929005656",
+     "date": "2026-03-29"
     }
    ]
   },
@@ -146,19 +146,8 @@ window.NETTY_DATA = {
    "icon": "🍳",
    "accent": "#ff9f43",
    "genre": "Cooking",
-   "totalViews": 724300000,
+   "totalViews": 375500000,
    "nominees": [
-    {
-     "id": "1288598886276879",
-     "page": "108851860817517",
-     "title": "You will never see another house like this!! 🤯",
-     "creator": "Janelle & Kate",
-     "views": 300000000,
-     "len": "2:58",
-     "reel": false,
-     "link": "https://facebook.com/1288598886276879",
-     "date": "2025-08-07"
-    },
     {
      "id": "970580255403282",
      "page": "244531834880",
@@ -182,26 +171,37 @@ window.NETTY_DATA = {
      "date": "2026-06-13"
     },
     {
-     "id": "1643683600002307",
-     "page": "244531834880",
-     "title": "This breakfast trick is a game changer! 😲",
-     "creator": "Kyle & Mistie Knight",
-     "views": 78600000,
-     "len": "11:58",
+     "id": "1168944105405318",
+     "page": "108851860817517",
+     "title": "blondes do have more fun",
+     "creator": "Janelle & Kate",
+     "views": 47700000,
+     "len": "1:32",
      "reel": false,
-     "link": "https://facebook.com/1643683600002307",
-     "date": "2026-02-16"
+     "link": "https://facebook.com/1168944105405318",
+     "date": "2025-12-27"
     },
     {
-     "id": "725854640478527",
-     "page": "102580158042017",
-     "title": "I wish I knew this sooner",
-     "creator": "Home Hacks & Easy Snacks",
-     "views": 65200000,
-     "len": "0:26",
+     "id": "778659015301286",
+     "page": "101404888847672",
+     "title": "don't pick the Wrong Box! 😂",
+     "creator": "Charles Parks",
+     "views": 23900000,
+     "len": "3:03",
      "reel": false,
-     "link": "https://facebook.com/725854640478527",
-     "date": "2025-09-24"
+     "link": "https://facebook.com/778659015301286",
+     "date": "2026-02-25"
+    },
+    {
+     "id": "1841472126780059",
+     "page": "121262234249042",
+     "title": "Easy family favorite",
+     "creator": "Elaine Carol’s Kitchen",
+     "views": 23400000,
+     "len": "3:49",
+     "reel": false,
+     "link": "https://facebook.com/1841472126780059",
+     "date": "2025-09-02"
     }
    ]
   },
@@ -212,7 +212,7 @@ window.NETTY_DATA = {
    "icon": "✂️",
    "accent": "#2ed8a7",
    "genre": "Hack / DIY / Crafting",
-   "totalViews": 885000000,
+   "totalViews": 769400000,
    "nominees": [
     {
      "id": "924970400099668",
@@ -224,17 +224,6 @@ window.NETTY_DATA = {
      "reel": false,
      "link": "https://facebook.com/924970400099668",
      "date": "2026-01-10"
-    },
-    {
-     "id": "1287934603002830",
-     "page": "103120584921936",
-     "title": "Nana uses a special snack-and-drink combo cup when eating in the car with her grandkids…",
-     "creator": "Liz & Jeff",
-     "views": 155000000,
-     "len": "0:15",
-     "reel": false,
-     "link": "https://facebook.com/1287934603002830",
-     "date": "2025-07-17"
     },
     {
      "id": "578895768614892",
@@ -259,15 +248,26 @@ window.NETTY_DATA = {
      "date": "2026-04-06"
     },
     {
-     "id": "1754087078576139",
-     "page": "137270426131310",
-     "title": "🍎 Yummy upside down apple tarts!",
-     "creator": "Jeff & Lauren",
-     "views": 120000000,
-     "len": "0:24",
+     "id": "900750019207096",
+     "page": "102843384767091",
+     "title": "She said “how do you like it?” 🤣",
+     "creator": "The Craft Show",
+     "views": 80400000,
+     "len": "0:11",
      "reel": false,
-     "link": "https://facebook.com/1754087078576139",
-     "date": "2025-09-18"
+     "link": "https://facebook.com/900750019207096",
+     "date": "2026-01-21"
+    },
+    {
+     "id": "900527935950890",
+     "page": "104258841428745",
+     "title": "Rats get hungry too. 🍕",
+     "creator": "Prompted Reality",
+     "views": 79000000,
+     "len": "0:12",
+     "reel": false,
+     "link": "https://facebook.com/900527935950890",
+     "date": "2026-02-23"
     }
    ]
   },
@@ -278,7 +278,7 @@ window.NETTY_DATA = {
    "icon": "✨",
    "accent": "#ff6bcb",
    "genre": "Influencer",
-   "totalViews": 852100000,
+   "totalViews": 828500000,
    "nominees": [
     {
      "id": "2670952596584366",
@@ -314,224 +314,26 @@ window.NETTY_DATA = {
      "date": "2025-12-30"
     },
     {
-     "id": "1193883482597979",
-     "page": "101510465593549",
-     "title": "Soldiers dad surprises him mid-flight! ❤️",
-     "creator": "Jamie and Blake",
-     "views": 95400000,
-     "len": "0:14",
+     "id": "1298119025421890",
+     "page": "112195860461765",
+     "title": "Wife logic 🤔",
+     "creator": "Blake K",
+     "views": 79900000,
+     "len": "0:05",
      "reel": false,
-     "link": "https://facebook.com/1193883482597979",
-     "date": "2025-11-02"
+     "link": "https://facebook.com/1298119025421890",
+     "date": "2025-11-10"
     },
     {
-     "id": "842678024771853",
-     "page": "101510465593549",
-     "title": "Brilliant! 🤩",
-     "creator": "Jamie and Blake",
-     "views": 85700000,
-     "len": "0:07",
+     "id": "1807171206851338",
+     "page": "103090504673207",
+     "title": "Finally a tutorial I can follow 😅",
+     "creator": "The G Family",
+     "views": 77600000,
+     "len": "0:19",
      "reel": false,
-     "link": "https://facebook.com/842678024771853",
-     "date": "2025-11-02"
-    }
-   ]
-  },
-  {
-   "key": "ai",
-   "label": "Best AI Video",
-   "tag": "Imagination, rendered — the new frontier",
-   "icon": "🤖",
-   "accent": "#3ec6ff",
-   "genre": "AI",
-   "totalViews": 745000000,
-   "nominees": [
-    {
-     "id": "1378156607341480",
-     "page": "112140857270360",
-     "title": "A Fox’s Life Saved on the Ice 🥹",
-     "creator": "Simulated Reality",
-     "views": 224000000,
-     "len": "0:15",
-     "reel": false,
-     "link": "https://facebook.com/1378156607341480",
-     "date": "2025-12-23"
-    },
-    {
-     "id": "920237057760570",
-     "page": "122081467896087",
-     "title": "They Locked Him In A Snake Pit. He Escaped And Blew Up The Boss’s Lamborghini.",
-     "creator": "Jibrizy",
-     "views": 156000000,
-     "len": "7:54",
-     "reel": false,
-     "link": "https://facebook.com/920237057760570",
-     "date": "2026-06-24"
-    },
-    {
-     "id": "1627126788984130",
-     "page": "122081467896087",
-     "title": "SWAT Tried To Run Him Down. He Stole Their 10-Ton Armored Truck Instead.",
-     "creator": "Jibrizy",
-     "views": 133000000,
-     "len": "6:15",
-     "reel": false,
-     "link": "https://facebook.com/1627126788984130",
-     "date": "2026-06-03"
-    },
-    {
-     "id": "1515947270242261",
-     "page": "122081467896087",
-     "title": "Veteran gets framed and proves everyone wrong",
-     "creator": "Jibrizy",
-     "views": 127000000,
-     "len": "28:41",
-     "reel": false,
-     "link": "https://facebook.com/1515947270242261",
-     "date": "2026-06-03"
-    },
-    {
-     "id": "2060967057991787",
-     "page": "2094169214163666",
-     "title": "Security Camera Captures Heroic German Shepherd Saving Toddler From Car Backing Into…",
-     "creator": "The Adley Show",
-     "views": 105000000,
-     "len": "0:10",
-     "reel": false,
-     "link": "https://facebook.com/2060967057991787",
-     "date": "2025-11-28"
-    }
-   ]
-  },
-  {
-   "key": "games",
-   "label": "Best Games & Bits",
-   "tag": "Skits, stunts and setups that hit every time",
-   "icon": "🎮",
-   "accent": "#7bd94a",
-   "genre": "Games",
-   "totalViews": 283900000,
-   "nominees": [
-    {
-     "id": "817665824536935",
-     "page": "108134647620736",
-     "title": "Mannequin surprises fellow employee 🤣",
-     "creator": "Getti",
-     "views": 69500000,
-     "len": "0:10",
-     "reel": false,
-     "link": "https://facebook.com/817665824536935",
-     "date": "2025-10-20"
-    },
-    {
-     "id": "24822501014097203",
-     "page": "108134647620736",
-     "title": "He said \"Do something\" 😂 Famous last words",
-     "creator": "Getti",
-     "views": 67400000,
-     "len": "0:09",
-     "reel": false,
-     "link": "https://facebook.com/24822501014097203",
-     "date": "2025-10-22"
-    },
-    {
-     "id": "1178069844128930",
-     "page": "106227839217497",
-     "title": "That Was Crazy 🤣",
-     "creator": "Little Bros",
-     "views": 58400000,
-     "len": "0:26",
-     "reel": false,
-     "link": "https://facebook.com/1178069844128930",
-     "date": "2025-07-30"
-    },
-    {
-     "id": "3734774393321227",
-     "page": "106267668352334",
-     "title": "Perfect Last-Minute Halloween Costume 🤣",
-     "creator": "Benson Bros",
-     "views": 47900000,
-     "len": "2:00",
-     "reel": false,
-     "link": "https://facebook.com/3734774393321227",
-     "date": "2025-10-11"
-    },
-    {
-     "id": "1620142852731139",
-     "page": "106267668352334",
-     "title": "I became 1 foot tall for Halloween 😂",
-     "creator": "Benson Bros",
-     "views": 40700000,
-     "len": "2:26",
-     "reel": false,
-     "link": "https://facebook.com/1620142852731139",
-     "date": "2025-10-25"
-    }
-   ]
-  },
-  {
-   "key": "pranks",
-   "label": "Best Prank",
-   "tag": "Gotcha moments executed to perfection",
-   "icon": "🃏",
-   "accent": "#ffd166",
-   "genre": "Pranks",
-   "totalViews": 62150000,
-   "nominees": [
-    {
-     "id": "799823839629167",
-     "page": "103228279094692",
-     "title": "He wanted fast food… got supersonic soup instead.",
-     "creator": "Olga P",
-     "views": 24800000,
-     "len": "0:13",
-     "reel": false,
-     "link": "https://facebook.com/799823839629167",
-     "date": "2025-11-01"
-    },
-    {
-     "id": "1563850977944872",
-     "page": "103228279094692",
-     "title": "Black Friday packing strategy: maximize space… even if Grandma’s included.",
-     "creator": "Olga P",
-     "views": 13100000,
-     "len": "0:15",
-     "reel": false,
-     "link": "https://facebook.com/1563850977944872",
-     "date": "2025-11-28"
-    },
-    {
-     "id": "892692520117166",
-     "page": "103228279094692",
-     "title": "When your doctor specializes in experimental gravity therapy.",
-     "creator": "Olga P",
-     "views": 8390000,
-     "len": "0:09",
-     "reel": false,
-     "link": "https://facebook.com/892692520117166",
-     "date": "2026-01-21"
-    },
-    {
-     "id": "846822771255532",
-     "page": "103228279094692",
-     "title": "Leg day gone too far 😭",
-     "creator": "Olga P",
-     "views": 8130000,
-     "len": "0:17",
-     "reel": false,
-     "link": "https://facebook.com/846822771255532",
-     "date": "2025-10-28"
-    },
-    {
-     "id": "827643562941004",
-     "page": "103228279094692",
-     "title": "Vacuum seal level: human burrito 🌯🤪😝",
-     "creator": "Olga P",
-     "views": 7730000,
-     "len": "0:09",
-     "reel": false,
-     "link": "https://facebook.com/827643562941004",
-     "date": "2025-09-30"
+     "link": "https://facebook.com/1807171206851338",
+     "date": "2025-09-10"
     }
    ]
   }

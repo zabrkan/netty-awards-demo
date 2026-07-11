@@ -268,29 +268,51 @@ button{font-family:inherit;cursor:pointer}
 }
 .card.picked .pickflag{display:inline-flex;animation:stamp .4s cubic-bezier(.2,2,.4,1)}
 .poster{
-  position:relative;height:148px;border-radius:15px 15px 0 0;overflow:hidden;cursor:pointer;
+  position:relative;aspect-ratio:9/16;border-radius:15px 15px 0 0;overflow:hidden;cursor:pointer;
   background:
-    radial-gradient(130% 100% at 12% -10%,color-mix(in srgb,var(--ac) 52%,transparent),transparent 62%),
-    repeating-linear-gradient(125deg,rgba(255,255,255,.028) 0 2px,transparent 2px 9px),
-    linear-gradient(160deg,color-mix(in srgb,var(--ac) 26%,#0b0b16),#0a0a13 75%);
+    radial-gradient(130% 70% at 50% -10%,color-mix(in srgb,var(--ac) 50%,transparent),transparent 62%),
+    repeating-linear-gradient(180deg,rgba(255,255,255,.024) 0 2px,transparent 2px 10px),
+    linear-gradient(175deg,color-mix(in srgb,var(--ac) 26%,#0b0b16),#0a0a13 78%);
 }
 .poster .ghost{
-  position:absolute;right:2px;bottom:-30px;font-family:var(--serif);font-weight:900;
-  font-size:128px;line-height:1;color:rgba(255,255,255,.07);user-select:none;
+  position:absolute;right:6px;top:26%;font-family:var(--serif);font-weight:900;
+  font-size:110px;line-height:1;color:rgba(255,255,255,.06);user-select:none;
 }
-.poster .em{position:absolute;left:14px;top:12px;font-size:40px;opacity:.95;filter:drop-shadow(0 4px 10px rgba(0,0,0,.5))}
+.poster .em{
+  position:absolute;left:50%;top:32%;transform:translate(-50%,-50%);font-size:58px;opacity:.2;
+  filter:drop-shadow(0 6px 16px rgba(0,0,0,.5));
+}
 .poster .rank{
-  position:absolute;left:14px;bottom:12px;font-size:10px;font-weight:800;letter-spacing:.16em;
+  position:absolute;left:10px;top:10px;font-size:9.5px;font-weight:800;letter-spacing:.14em;
   color:var(--gold1);background:rgba(10,9,5,.72);border:1px solid var(--gold4);
-  border-radius:99px;padding:4px 9px;
+  border-radius:99px;padding:4px 9px;z-index:2;
 }
-.poster .reel{
-  position:absolute;right:12px;top:12px;font-size:9px;font-weight:800;letter-spacing:.16em;
-  color:var(--ink);background:rgba(0,0,0,.5);border:1px solid var(--line2);border-radius:4px;padding:3px 6px;
+.poster .lenchip{
+  position:absolute;right:10px;top:10px;font-size:9px;font-weight:800;letter-spacing:.1em;
+  color:var(--ink);background:rgba(0,0,0,.55);border:1px solid var(--line2);border-radius:6px;
+  padding:3px 7px;z-index:2;
 }
+/* reels-style caption overlay */
+.rovl{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;padding:44px 12px 12px;
+  background:linear-gradient(180deg,transparent,rgba(4,4,10,.58) 34%,rgba(4,4,10,.94));
+  display:flex;flex-direction:column;gap:7px;pointer-events:none;
+}
+.rtitle{
+  font-size:13px;font-weight:600;line-height:1.35;color:#fff;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.rcreator{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;color:#ece6da}
+.rav{
+  width:20px;height:20px;border-radius:99px;background:var(--ac);color:#fff;flex:none;
+  display:grid;place-items:center;font-size:10px;font-weight:800;
+  box-shadow:0 0 10px color-mix(in srgb,var(--ac) 60%,transparent);
+}
+.rstats{display:flex;gap:9px;font-size:10.5px;color:var(--dim);align-items:center}
+.rstats .v{color:var(--gold1);font-weight:800}
 .poster .play{
   position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:.3s;
-  background:rgba(5,5,10,.34);
+  background:rgba(5,5,10,.34);z-index:3;
 }
 .poster .play span{
   width:54px;height:54px;border-radius:99px;display:grid;place-items:center;font-size:19px;
@@ -305,20 +327,7 @@ button{font-family:inherit;cursor:pointer}
   transition:transform .7s ease;
 }
 .card:hover .poster::after{transform:translateX(130%) skewX(-18deg)}
-.card-bd{padding:14px 15px 15px;display:flex;flex-direction:column;gap:8px;flex:1}
-.vtitle{
-  font-size:14.5px;font-weight:600;line-height:1.32;min-height:2.6em;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
-}
-.vcreator{font-size:12.5px;color:var(--dim);display:flex;align-items:center;gap:6px}
-.vcreator .dot{width:5px;height:5px;border-radius:99px;background:var(--ac);box-shadow:0 0 6px var(--ac);flex:none}
-.vmeta{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
-.vmeta span{
-  font-size:10.5px;font-weight:600;letter-spacing:.05em;color:var(--dim);
-  border:1px solid var(--line);border-radius:6px;padding:3px 7px;background:rgba(255,255,255,.02)
-}
-.vmeta .views{color:var(--gold1);border-color:var(--gold4)}
-.card-actions{display:flex;gap:8px;margin-top:10px}
+.card-actions{display:flex;gap:8px;padding:10px 11px 12px}
 .btn-watch{
   flex:0 0 auto;border:1px solid var(--line2);background:transparent;color:var(--ink);
   border-radius:10px;padding:9px 13px;font-size:12px;font-weight:600;
@@ -450,11 +459,28 @@ footer .reset:hover{color:var(--red2)}
 .fb-perms{list-style:none;margin:10px 0 16px;padding:12px 14px;border:1px solid var(--line);
   border-radius:11px;background:var(--panel);font-size:13.5px;color:var(--dim)}
 
-/* watch modal */
-.player{position:relative;border-radius:14px;overflow:hidden;background:#000;aspect-ratio:16/9;margin-top:18px}
+/* watch modal — reels are vertical, so the stage is 9:16 */
+.player{position:relative;border-radius:14px;overflow:hidden;background:#000;margin-top:18px;
+  aspect-ratio:9/16;max-height:66vh;margin-left:auto;margin-right:auto;
+  width:min(100%, calc(66vh * 9 / 16))}
 .player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .watch-fallback{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
 .watch-fallback .fb{font-size:12px;color:var(--faint)}
+
+/* seal reminder bar */
+.sealbar{
+  position:fixed;left:50%;bottom:20px;transform:translate(-50%,130px);z-index:95;
+  display:flex;align-items:center;gap:14px;padding:11px 13px 11px 20px;border-radius:99px;
+  background:rgba(13,13,23,.95);border:1px solid var(--gold3);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  box-shadow:0 14px 50px rgba(0,0,0,.6),0 0 28px rgba(232,182,76,.16);
+  transition:.5s cubic-bezier(.2,1,.3,1);opacity:0;max-width:94vw;flex-wrap:wrap;justify-content:center;
+}
+.sealbar.show{transform:translate(-50%,0);opacity:1}
+.sealbar span{font-size:13px;font-weight:600}
+.sealbar span b{color:var(--gold1)}
+.sealbar .btn{padding:10px 18px;font-size:12.5px;animation:sealpulse 1.9s ease-in-out infinite}
+@keyframes sealpulse{50%{transform:scale(1.06)}}
 
 /* toast */
 .toast{
@@ -504,7 +530,7 @@ footer .reset:hover{color:var(--red2)}
     <h1>The Netty<br>Awards</h1>
     <span class="year">2026</span>
     <p class="sub">One year of scroll-stopping videos. <b id="statViewsInline">4.6 billion</b> views.
-      Forty nominees picked by the numbers — and <b>one winner per category picked by you</b>.</p>
+      <b id="nomCountInline">25</b> nominees picked by the numbers — and <b>one winner per category picked by you</b>.</p>
     <div class="statrow" id="statrow">
       <div class="stat"><div class="n goldtext" data-count id="statCats">0</div><div class="l">CATEGORIES</div></div>
       <div class="stat"><div class="n goldtext" data-count id="statNoms">0</div><div class="l">NOMINEES</div></div>
@@ -541,7 +567,7 @@ footer .reset:hover{color:var(--red2)}
         impersonate another donor. Our team matches your identity against the donor list and your ballot
         unlocks automatically.</p></div>
       <div class="step rv"><span class="num">3</span><div class="ic">🗳</div>
-        <h3>Vote in all 8 categories</h3>
+        <h3>Vote in every category</h3>
         <p>Punch your ticket, back your favorites, seal your ballot. Winners are revealed live at the Netty&nbsp;Awards&nbsp;Show on September&nbsp;14.</p></div>
     </div>
     <div class="meter-card rv">
@@ -566,7 +592,7 @@ footer .reset:hover{color:var(--red2)}
   <div class="wrap">
     <div class="cats-head rv">
       <p class="overline" style="color:var(--gold2)">The ballot</p>
-      <h2>Eight categories.<br><span class="goldtext">Five heavyweights each.</span></h2>
+      <h2><span id="catCountWord">Five</span> categories.<br><span class="goldtext">Five heavyweights each.</span></h2>
       <p>Nominees are seeded straight from the data — the five most-watched videos in every genre from
         the past 12 months. No committees, no politics. Just the scroll, quantified.</p>
     </div>
@@ -585,7 +611,7 @@ footer .reset:hover{color:var(--red2)}
     <div style="margin-top:30px">
       <button class="btn btn-gold btn-big" id="submitBtn" disabled>🧧 Seal my ballot</button>
     </div>
-    <p class="note" id="submitNote">Vote in all 8 categories to seal your ballot.</p>
+    <p class="note" id="submitNote">Vote in every category to seal your ballot.</p>
   </div>
 </section>
 
@@ -607,7 +633,7 @@ footer .reset:hover{color:var(--red2)}
 
     <div data-tkview="locked">
       <h3>Get your <span class="goldtext">Golden Ticket</span></h3>
-      <p class="sub">One donation to St. Jude — any amount — unlocks your ballot for all 8 categories.</p>
+      <p class="sub">One donation to St. Jude — any amount — unlocks your ballot for every category.</p>
       <div class="ticket locked-art" id="tkArtLocked">
         <div class="edge t"></div>
         <div class="tk-top"><span>NETWORK MEDIA</span><span>ADMIT ONE</span></div>
@@ -713,7 +739,7 @@ footer .reset:hover{color:var(--red2)}
   <div class="sheet">
     <button class="x" data-close>✕</button>
     <h3 style="text-align:center">Ballot <span class="goldtext">sealed</span> 🏆</h3>
-    <p class="sub" style="text-align:center">You backed 8 nominees and one very good cause.<br>
+    <p class="sub" style="text-align:center">You backed a nominee in every category — and one very good cause.<br>
       Winners revealed live at <b>the Netty Awards Show · September 14</b>.</p>
     <div class="ballot" id="sealBallot" style="margin-top:22px"></div>
     <div class="tk-actions" style="margin-top:22px">
@@ -747,6 +773,11 @@ footer .reset:hover{color:var(--red2)}
       </div>
     </div>
   </div>
+</div>
+
+<div class="sealbar" id="sealBar" role="status">
+  <span>🗳 All picks in — <b>your ballot doesn’t count until you seal it!</b></span>
+  <button class="btn btn-gold" id="sbGo">🧧 Seal it now</button>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -872,7 +903,9 @@ function renderHud() {
     if (on && !i.classList.contains("on")) { i.classList.add("on","pop"); setTimeout(()=>i.classList.remove("pop"),600); }
     if (!on) i.classList.remove("on");
   });
-  $("#hudLabel").textContent = S.sealed ? "Ballot sealed 🧧" : `${votesCount()}/${CATS.length} categories`;
+  $("#hudLabel").textContent = S.sealed ? "Ballot sealed 🧧"
+    : votesCount() === CATS.length ? "All picked — seal it! ⚠"
+    : `${votesCount()}/${CATS.length} categories`;
   const chip = $("#ticketChip"), txt = $("#ticketChipTxt");
   chip.classList.remove("gold","pending");
   if (S.t === "unlocked") { chip.classList.add("gold"); txt.textContent = S.no; }
@@ -883,6 +916,9 @@ function renderHud() {
 /* ======================= hero ======================= */
 $("#statCats").dataset.target = CATS.length;
 $("#statNoms").dataset.target = CATS.reduce((a,c) => a + c.nominees.length, 0);
+const NUMWORDS = ["Zero","One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"];
+$("#catCountWord").textContent = NUMWORDS[CATS.length] || CATS.length;
+$("#nomCountInline").textContent = CATS.reduce((a,c) => a + c.nominees.length, 0);
 const totalViews = CATS.reduce((a,c) => a + c.totalViews, 0);
 $("#statViews").textContent = fmtViews(totalViews);
 $("#statViewsInline").textContent = (totalViews/1e9).toFixed(1) + " billion";
@@ -946,22 +982,21 @@ CATS.forEach((c, ci) => {
           <div class="poster" data-watch role="button" tabindex="0" aria-label="Watch ${esc(n.title)}">
             <span class="ghost">${i+1}</span>
             <span class="em">${c.icon}</span>
-            ${n.reel ? '<span class="reel">REEL</span>' : ""}
             <span class="rank">${i === 0 ? "👑 TOP SEED" : "SEED #" + (i+1)}</span>
+            <span class="lenchip">${n.reel ? "REEL" : "VIDEO"}${n.len ? " · " + n.len : ""}</span>
             <span class="play"><span>▶</span></span>
+            <div class="rovl">
+              <p class="rtitle">${esc(n.title)}</p>
+              <p class="rcreator"><span class="rav">${esc((n.creator.trim()[0] || "?").toUpperCase())}</span>${esc(n.creator)}</p>
+              <div class="rstats">
+                <span class="v" data-views="${n.views}">▶ 0</span>
+                <span>${fmtDate(n.date)}</span>
+              </div>
+            </div>
           </div>
-          <div class="card-bd">
-            <h4 class="vtitle">${esc(n.title)}</h4>
-            <p class="vcreator"><span class="dot"></span>${esc(n.creator)}</p>
-            <div class="vmeta">
-              <span class="views" data-views="${n.views}">▶ 0</span>
-              ${n.len ? `<span>${n.len}</span>` : ""}
-              <span>${fmtDate(n.date)}</span>
-            </div>
-            <div class="card-actions">
-              <button class="btn-watch" data-watch>▶ Watch</button>
-              <button class="btn-vote" data-vote>VOTE</button>
-            </div>
+          <div class="card-actions">
+            <button class="btn-watch" data-watch>▶ Watch</button>
+            <button class="btn-vote" data-vote>VOTE</button>
           </div>
         </article>`).join("")}
     </div>`;
@@ -1021,7 +1056,7 @@ mount.addEventListener("click", e => {
   burst(r.left + r.width/2, r.top + r.height/2, 60, ["#f7d977","#fff3c4", cat.accent, "#ffffff"]);
   const left = CATS.length - votesCount();
   toast(switching ? `Switched to “${nom.title.slice(0,42)}…” ✨`
-      : left === 0 ? "That’s all 8! Scroll down to seal your ballot 🧧"
+      : left === 0 ? `That’s all ${CATS.length}! Scroll down to seal your ballot 🧧`
       : `Locked in for ${cat.label} — ${left} to go`);
 });
 /* keyboard access for posters */
@@ -1048,6 +1083,7 @@ function ballotRows() {
 function renderBallot() {
   $("#ballotMount").innerHTML = ballotRows();
   const all = votesCount() === CATS.length;
+  $("#sealBar").classList.toggle("show", all && !S.sealed);
   const btn = $("#submitBtn");
   btn.disabled = !all || S.sealed;
   btn.innerHTML = S.sealed ? "🧧 Ballot sealed — thank you!" : "🧧 Seal my ballot";
@@ -1056,6 +1092,8 @@ function renderBallot() {
     : all ? "All 8 in. Ready when you are."
     : `Vote in all ${CATS.length} categories to seal your ballot · ${CATS.length - votesCount()} to go`;
 }
+$("#sbGo").addEventListener("click", () =>
+  $("#recap").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" }));
 $("#submitBtn").addEventListener("click", () => {
   if (S.sealed || votesCount() !== CATS.length) return;
   S.sealed = true; save(); renderVotes();
@@ -1064,7 +1102,7 @@ $("#submitBtn").addEventListener("click", () => {
   openModal("#sealModal");
 });
 $("#copyShare").addEventListener("click", async () => {
-  const txt = `I just voted in the 2026 Netty Awards 🏆 8 categories, 40 creator legends — all of it for St. Jude ❤️ Grab a Golden Ticket and vote too: ${CONFIG.fundraiser}`;
+  const txt = `I just voted in the 2026 Netty Awards 🏆 ${CATS.length} categories, ${CATS.reduce((a,c)=>a+c.nominees.length,0)} creator legends — all of it for St. Jude ❤️ Grab a Golden Ticket and vote too: ${CONFIG.fundraiser}`;
   try { await navigator.clipboard.writeText(txt); toast("Share text copied 📋"); }
   catch (e) { prompt("Copy your share text:", txt); }
 });
