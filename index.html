@@ -803,6 +803,12 @@ const finePointer  = matchMedia("(pointer: fine)").matches;
 
 /* ======================= state ======================= */
 const KEY = "netty26";
+/* ?reset (or ?fresh) wipes ticket + votes + sealed ballot, then loads clean */
+if (/[?&](reset|fresh)\b/.test(location.search)) {
+  localStorage.removeItem(KEY);
+  localStorage.removeItem("netty26_queue");
+  location.replace(location.pathname);
+}
 let S = { t: "locked", name: "", no: null, votes: {}, sealed: false };
 try { S = { ...S, ...(JSON.parse(localStorage.getItem(KEY)) || {}) }; } catch (e) {}
 const save = () => localStorage.setItem(KEY, JSON.stringify(S));
