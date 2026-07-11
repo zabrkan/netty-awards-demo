@@ -512,7 +512,7 @@ footer .reset:hover{color:var(--red2)}
     <a class="brand" href="#top"><span class="tro">🏆</span><span class="goldtext">NETTY&nbsp;AWARDS&nbsp;’26</span></a>
     <div class="hud-progress" id="hudProgress" title="Your ballot progress">
       <div class="dots" id="hudDots"></div>
-      <span class="hud-label" id="hudLabel">0/8 categories</span>
+      <span class="hud-label" id="hudLabel"></span>
     </div>
     <div class="hud-right">
       <button class="chip" id="ticketChip">🎟 <span id="ticketChipTxt">Ticket: locked</span></button>
@@ -1089,7 +1089,7 @@ function renderBallot() {
   btn.innerHTML = S.sealed ? "🧧 Ballot sealed — thank you!" : "🧧 Seal my ballot";
   $("#submitNote").textContent = S.sealed
     ? `Sealed with ticket ${S.no} · winners live at the Netty Awards Show, Sept 14`
-    : all ? "All 8 in. Ready when you are."
+    : all ? `All ${CATS.length} in. Ready when you are.`
     : `Vote in all ${CATS.length} categories to seal your ballot · ${CATS.length - votesCount()} to go`;
 }
 $("#sbGo").addEventListener("click", () =>
@@ -1231,6 +1231,12 @@ function openWatch(cat, nom) {
        title="${esc(nom.title)}"></iframe>`;
   openModal("#watchModal");
 }
+/* embed can be blocked by page settings — fallback opens a reel-shaped popup on facebook.com */
+$("#watchFbLink").addEventListener("click", e => {
+  const w = window.open(e.currentTarget.href, "nettyPreview",
+    "width=430,height=830,left=120,top=40,noopener");
+  if (w) e.preventDefault();
+});
 
 /* ======================= modals ======================= */
 function openModal(sel) { $(sel).classList.add("open"); document.body.style.overflow = "hidden"; }
