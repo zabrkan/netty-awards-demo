@@ -1,0 +1,1279 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Netty Awards 2026 — Network Media</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏆</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================== base ============================== */
+:root{
+  --bg:#07070e; --panel:rgba(255,255,255,.045); --panel2:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.16);
+  --ink:#f4efe6; --dim:#a8a294; --faint:#6d6a60;
+  --gold1:#ffe9a3; --gold2:#e8b64c; --gold3:#a97e22; --gold4:#6b4d12;
+  --red:#e8394f; --red2:#ff5964;
+  --grad-gold:linear-gradient(105deg,#8a6116 0%,#e8b64c 30%,#fff3c4 50%,#e8b64c 70%,#8a6116 100%);
+  --serif:"Fraunces","Didot","Playfair Display",Georgia,serif;
+  --sans:"Outfit",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-weight:400;line-height:1.5;overflow-x:hidden;
+}
+body::before{ /* deep stage glow */
+  content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(60% 45% at 50% -5%, rgba(232,182,76,.14), transparent 65%),
+    radial-gradient(45% 35% at 12% 110%, rgba(232,57,79,.10), transparent 60%),
+    radial-gradient(45% 35% at 88% 110%, rgba(90,60,220,.10), transparent 60%);
+}
+body::after{ /* film grain */
+  content:"";position:fixed;inset:0;z-index:120;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+}
+a{color:inherit}
+button{font-family:inherit;cursor:pointer}
+::selection{background:#e8b64c;color:#1c1302}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:2px;border-radius:6px}
+.goldtext{background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+@media(max-width:640px){.wrap{padding:0 16px}}
+
+/* ============================== fx canvas ============================== */
+#fx{position:fixed;inset:0;z-index:130;pointer-events:none}
+
+/* ============================== HUD ============================== */
+.hud{
+  position:sticky;top:0;z-index:100;
+  background:rgba(7,7,14,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.hud-in{display:flex;align-items:center;gap:16px;height:60px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.14em;font-size:13px;text-decoration:none;white-space:nowrap}
+.brand .tro{font-size:19px;filter:drop-shadow(0 0 8px rgba(232,182,76,.6))}
+.hud-progress{display:flex;align-items:center;gap:10px;margin:0 auto}
+.dots{display:flex;gap:6px}
+.dots i{
+  width:10px;height:10px;transform:rotate(45deg);border:1px solid var(--line2);
+  background:rgba(255,255,255,.05);transition:.35s;
+}
+.dots i.on{background:var(--grad-gold);border-color:var(--gold2);box-shadow:0 0 8px rgba(232,182,76,.75)}
+.dots i.pop{animation:dotpop .5s cubic-bezier(.2,2.4,.4,1)}
+@keyframes dotpop{40%{transform:rotate(45deg) scale(1.7)}}
+.hud-label{font-size:12px;color:var(--dim);letter-spacing:.08em;white-space:nowrap}
+.hud-right{display:flex;align-items:center;gap:10px;margin-left:auto}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:99px;
+  border:1px solid var(--line2);background:var(--panel);color:var(--ink);
+  font-size:12.5px;font-weight:600;letter-spacing:.03em;transition:.25s;white-space:nowrap
+}
+.chip:hover{border-color:var(--gold3);transform:translateY(-1px)}
+.chip.gold{border-color:var(--gold3);background:linear-gradient(160deg,rgba(232,182,76,.22),rgba(232,182,76,.06));color:var(--gold1)}
+.chip.pending{border-color:#7a6a3a;color:#e6d9ae}
+.chip.pending .tick{animation:pulse 1.4s infinite}
+@keyframes pulse{50%{opacity:.35}}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;border:none;border-radius:99px;
+  font-weight:700;letter-spacing:.04em;transition:.25s;text-decoration:none;
+}
+.btn-donate{
+  background:linear-gradient(135deg,#c81a3f,#ff5964);color:#fff;padding:8px 16px;font-size:12.5px;
+  box-shadow:0 4px 18px rgba(232,57,79,.35);
+}
+.btn-donate:hover{transform:translateY(-2px);box-shadow:0 8px 26px rgba(232,57,79,.5)}
+@media(max-width:860px){.hud-label{display:none}}
+@media(max-width:700px){.hud-progress{display:none}}
+@media(max-width:480px){
+  .hud-in{gap:8px}
+  .brand{font-size:11px;letter-spacing:.08em}
+  .chip{padding:6px 10px;font-size:11.5px}
+  .btn-donate{padding:7px 12px;font-size:11.5px}
+}
+
+/* ============================== hero ============================== */
+.hero{position:relative;padding:86px 0 70px;text-align:center;overflow:hidden}
+.beam{
+  position:absolute;top:-140px;width:340px;height:150%;z-index:-1;opacity:.16;
+  background:linear-gradient(to bottom,rgba(255,236,170,.95),transparent 75%);
+  filter:blur(28px);transform-origin:top center;pointer-events:none;
+}
+.beam.l{left:6%;animation:sweepL 11s ease-in-out infinite alternate}
+.beam.r{right:6%;animation:sweepR 13s ease-in-out infinite alternate}
+@keyframes sweepL{from{transform:rotate(-24deg)}to{transform:rotate(16deg)}}
+@keyframes sweepR{from{transform:rotate(22deg)}to{transform:rotate(-18deg)}}
+.marquee{
+  height:12px;max-width:660px;margin:0 auto;border-radius:99px;
+  background-image:radial-gradient(circle 3px at 12px 6px,var(--gold1) 42%,transparent 46%),
+                   radial-gradient(circle 3px at 36px 6px,var(--gold3) 42%,transparent 46%);
+  background-size:48px 12px;
+  animation:twinkle 1.1s steps(2) infinite;
+}
+@keyframes twinkle{50%{background-image:radial-gradient(circle 3px at 12px 6px,var(--gold3) 42%,transparent 46%),radial-gradient(circle 3px at 36px 6px,var(--gold1) 42%,transparent 46%)}}
+.marquee.btm{margin-top:44px}
+.kicker{
+  margin-top:42px;font-size:12.5px;font-weight:700;letter-spacing:.42em;color:var(--dim);
+  text-transform:uppercase;
+}
+.hero h1{
+  font-family:var(--serif);font-weight:900;font-size:clamp(58px,9.6vw,132px);line-height:.98;
+  letter-spacing:.01em;margin:14px 0 6px;
+  background:var(--grad-gold);background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shimmer 5.5s ease-in-out infinite;
+  filter:drop-shadow(0 6px 30px rgba(232,182,76,.24));
+}
+@keyframes shimmer{0%,100%{background-position:0% 0}50%{background-position:100% 0}}
+.year{
+  display:inline-block;font-family:var(--serif);font-weight:700;font-size:clamp(20px,2.6vw,30px);
+  letter-spacing:.5em;padding-left:.5em;color:var(--ink);opacity:.92;
+}
+.hero .sub{max-width:660px;margin:22px auto 0;color:var(--dim);font-size:17px;font-weight:300}
+.hero .sub b{color:var(--ink);font-weight:600}
+.statrow{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:34px}
+.stat{
+  min-width:132px;padding:14px 20px;border:1px solid var(--line);border-radius:14px;
+  background:var(--panel);
+}
+.stat .n{font-family:var(--serif);font-weight:700;font-size:30px;line-height:1.1}
+.stat .l{font-size:10.5px;letter-spacing:.22em;color:var(--faint);font-weight:600;margin-top:3px}
+.ctarow{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:34px}
+.btn-big{padding:16px 30px;font-size:15px;border-radius:99px}
+.btn-gold{
+  background:var(--grad-gold);background-size:200% 100%;color:#241703;
+  box-shadow:0 6px 30px rgba(232,182,76,.35);
+}
+.btn-gold:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 10px 40px rgba(232,182,76,.55);background-position:100% 0}
+.btn-ghost{border:1px solid var(--line2);color:var(--ink);background:transparent}
+.btn-ghost:hover{border-color:var(--gold3);background:var(--panel)}
+.countdown{margin-top:32px;font-size:12px;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+.countdown .t{
+  display:inline-flex;gap:6px;margin-left:10px;font-family:var(--serif);font-size:16px;
+  color:var(--gold1);letter-spacing:.06em;font-weight:700;
+}
+
+/* ============================== st. jude ============================== */
+.stjude{position:relative;margin-top:30px;padding:74px 0}
+.stjude::before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,transparent,rgba(200,26,63,.075) 30%,rgba(200,26,63,.075) 70%,transparent);
+}
+.sj-head{text-align:center;max-width:760px;margin:0 auto}
+.overline{font-size:11.5px;font-weight:700;letter-spacing:.34em;text-transform:uppercase;color:var(--red2)}
+.sj-head h2,.cats-head h2,.recap h2{font-family:var(--serif);font-weight:900;font-size:clamp(32px,4.6vw,52px);margin-top:10px}
+.sj-head p{color:var(--dim);margin-top:14px;font-size:16.5px;font-weight:300}
+.sj-head p b{color:var(--ink);font-weight:600}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+@media(max-width:860px){.steps{grid-template-columns:1fr}}
+.step{
+  position:relative;padding:26px 24px 24px;border:1px solid var(--line);border-radius:18px;
+  background:var(--panel);transition:.3s;
+}
+.step:hover{transform:translateY(-4px);border-color:var(--gold4);background:var(--panel2)}
+.step .num{
+  position:absolute;top:-14px;left:22px;width:28px;height:28px;border-radius:99px;
+  background:var(--grad-gold);color:#241703;font-weight:800;font-size:13px;
+  display:grid;place-items:center;box-shadow:0 3px 12px rgba(232,182,76,.4);
+}
+.step .ic{font-size:30px}
+.step h3{font-size:17px;margin-top:10px;font-weight:700}
+.step p{font-size:13.5px;color:var(--dim);margin-top:7px}
+.meter-card{
+  margin:34px auto 0;max-width:640px;padding:22px 26px;border:1px solid var(--line);
+  border-radius:18px;background:var(--panel);
+}
+.meter-top{display:flex;justify-content:space-between;align-items:baseline;font-size:13px;color:var(--dim)}
+.meter-top b{color:var(--ink);font-size:17px;font-family:var(--serif)}
+.meter{height:14px;border-radius:99px;background:rgba(255,255,255,.07);margin-top:10px;overflow:hidden;position:relative}
+.meter .fill{
+  height:100%;width:0;border-radius:99px;transition:width 1.6s cubic-bezier(.2,.7,.2,1);
+  background:linear-gradient(90deg,#c81a3f,#ff5964,#ffb3a0);
+  box-shadow:0 0 14px rgba(255,89,100,.6);
+}
+.meter .fill::after{
+  content:"";position:absolute;inset:0;border-radius:99px;
+  background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);
+  background-size:200% 100%;animation:shimmer 2.6s linear infinite;
+}
+.meter-sub{display:flex;justify-content:space-between;font-size:11.5px;color:var(--faint);margin-top:8px;letter-spacing:.05em}
+.demo-tag{
+  display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.18em;color:#0e0c06;
+  background:#e6d9ae;border-radius:4px;padding:2px 6px;vertical-align:2px;margin-left:8px;
+}
+.sj-ctas{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:32px}
+.fineprint{max-width:620px;margin:26px auto 0;text-align:center;font-size:11.5px;color:var(--faint);line-height:1.7}
+
+/* ============================== categories ============================== */
+.cats{padding:76px 0 20px}
+.cats-head{text-align:center;max-width:720px;margin:0 auto 20px}
+.cats-head p{color:var(--dim);margin-top:12px;font-size:15px;font-weight:300}
+.catbar{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:26px 0 10px}
+.catbar a{
+  font-size:12px;font-weight:600;letter-spacing:.04em;text-decoration:none;color:var(--dim);
+  border:1px solid var(--line);border-radius:99px;padding:7px 13px;transition:.2s;background:var(--panel)
+}
+.catbar a:hover{color:var(--ink);border-color:var(--gold3)}
+.catbar a.done{color:var(--gold1);border-color:var(--gold4);background:rgba(232,182,76,.08)}
+.cat{padding:46px 0 8px}
+.cat-head{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:22px}
+.medal{
+  width:58px;height:58px;border-radius:99px;display:grid;place-items:center;font-size:27px;flex:none;
+  background:radial-gradient(circle at 32% 28%,color-mix(in srgb,var(--ac) 60%,#fff 8%),color-mix(in srgb,var(--ac) 26%,#0a0a14) 72%);
+  border:1px solid color-mix(in srgb,var(--ac) 55%,transparent);
+  box-shadow:0 0 22px color-mix(in srgb,var(--ac) 34%,transparent);
+}
+.cat-head h3{font-family:var(--serif);font-weight:900;font-size:clamp(26px,3.4vw,38px);line-height:1.05}
+.cat-head .tagline{color:var(--dim);font-size:13.5px;margin-top:4px;font-weight:300}
+.cat-meta{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pill{
+  font-size:11px;letter-spacing:.08em;font-weight:600;color:var(--dim);
+  border:1px solid var(--line);border-radius:99px;padding:5px 11px;background:var(--panel);white-space:nowrap
+}
+.seal{
+  display:none;align-items:center;gap:6px;font-size:11.5px;font-weight:800;letter-spacing:.1em;
+  color:#241703;background:var(--grad-gold);border-radius:99px;padding:6px 13px;
+  box-shadow:0 3px 14px rgba(232,182,76,.45);
+}
+.cat.voted .seal{display:inline-flex;animation:stamp .45s cubic-bezier(.2,2,.4,1)}
+@keyframes stamp{from{transform:scale(1.9) rotate(-11deg);opacity:0}}
+.noms{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+@media(max-width:1120px){
+  .noms{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;margin:0 -16px;padding-left:16px;padding-right:16px}
+  .noms::-webkit-scrollbar{height:6px}
+  .noms::-webkit-scrollbar-thumb{background:var(--line2);border-radius:99px}
+  .card{flex:0 0 236px;scroll-snap-align:start}
+}
+.card{
+  position:relative;border:1px solid var(--line);border-radius:16px;background:var(--panel);
+  display:flex;flex-direction:column;transition:transform .3s,border-color .3s,box-shadow .3s,opacity .3s;
+  perspective:600px;
+}
+.card:hover{transform:translateY(-5px);border-color:color-mix(in srgb,var(--ac) 55%,transparent);
+  box-shadow:0 14px 38px rgba(0,0,0,.45),0 0 24px color-mix(in srgb,var(--ac) 18%,transparent)}
+.card.picked{
+  border-color:var(--gold2);
+  box-shadow:0 0 0 1px var(--gold3),0 10px 36px rgba(232,182,76,.22);
+}
+.cat.voted .card:not(.picked){opacity:.62}
+.cat.voted .card:not(.picked):hover{opacity:1}
+.pickflag{
+  position:absolute;top:-11px;right:12px;z-index:3;display:none;align-items:center;gap:5px;
+  font-size:10px;font-weight:800;letter-spacing:.14em;color:#241703;
+  background:var(--grad-gold);padding:4px 10px;border-radius:99px;box-shadow:0 3px 12px rgba(232,182,76,.5);
+}
+.card.picked .pickflag{display:inline-flex;animation:stamp .4s cubic-bezier(.2,2,.4,1)}
+.poster{
+  position:relative;height:148px;border-radius:15px 15px 0 0;overflow:hidden;cursor:pointer;
+  background:
+    radial-gradient(130% 100% at 12% -10%,color-mix(in srgb,var(--ac) 52%,transparent),transparent 62%),
+    repeating-linear-gradient(125deg,rgba(255,255,255,.028) 0 2px,transparent 2px 9px),
+    linear-gradient(160deg,color-mix(in srgb,var(--ac) 26%,#0b0b16),#0a0a13 75%);
+}
+.poster .ghost{
+  position:absolute;right:2px;bottom:-30px;font-family:var(--serif);font-weight:900;
+  font-size:128px;line-height:1;color:rgba(255,255,255,.07);user-select:none;
+}
+.poster .em{position:absolute;left:14px;top:12px;font-size:40px;opacity:.95;filter:drop-shadow(0 4px 10px rgba(0,0,0,.5))}
+.poster .rank{
+  position:absolute;left:14px;bottom:12px;font-size:10px;font-weight:800;letter-spacing:.16em;
+  color:var(--gold1);background:rgba(10,9,5,.72);border:1px solid var(--gold4);
+  border-radius:99px;padding:4px 9px;
+}
+.poster .reel{
+  position:absolute;right:12px;top:12px;font-size:9px;font-weight:800;letter-spacing:.16em;
+  color:var(--ink);background:rgba(0,0,0,.5);border:1px solid var(--line2);border-radius:4px;padding:3px 6px;
+}
+.poster .play{
+  position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:.3s;
+  background:rgba(5,5,10,.34);
+}
+.poster .play span{
+  width:54px;height:54px;border-radius:99px;display:grid;place-items:center;font-size:19px;
+  background:rgba(255,255,255,.94);color:#0a0a14;padding-left:4px;
+  box-shadow:0 8px 30px rgba(0,0,0,.55);transition:transform .3s;
+}
+.card:hover .play{opacity:1}
+.card:hover .play span{transform:scale(1.08)}
+.poster::after{ /* sheen */
+  content:"";position:absolute;inset:0;transform:translateX(-130%) skewX(-18deg);
+  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.14) 50%,transparent 60%);
+  transition:transform .7s ease;
+}
+.card:hover .poster::after{transform:translateX(130%) skewX(-18deg)}
+.card-bd{padding:14px 15px 15px;display:flex;flex-direction:column;gap:8px;flex:1}
+.vtitle{
+  font-size:14.5px;font-weight:600;line-height:1.32;min-height:2.6em;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.vcreator{font-size:12.5px;color:var(--dim);display:flex;align-items:center;gap:6px}
+.vcreator .dot{width:5px;height:5px;border-radius:99px;background:var(--ac);box-shadow:0 0 6px var(--ac);flex:none}
+.vmeta{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
+.vmeta span{
+  font-size:10.5px;font-weight:600;letter-spacing:.05em;color:var(--dim);
+  border:1px solid var(--line);border-radius:6px;padding:3px 7px;background:rgba(255,255,255,.02)
+}
+.vmeta .views{color:var(--gold1);border-color:var(--gold4)}
+.card-actions{display:flex;gap:8px;margin-top:10px}
+.btn-watch{
+  flex:0 0 auto;border:1px solid var(--line2);background:transparent;color:var(--ink);
+  border-radius:10px;padding:9px 13px;font-size:12px;font-weight:600;
+}
+.btn-watch:hover{border-color:var(--ac);color:var(--ac)}
+.btn-vote{
+  flex:1;border:none;border-radius:10px;padding:9px 12px;font-size:12px;font-weight:800;letter-spacing:.06em;
+  background:color-mix(in srgb,var(--ac) 20%,rgba(255,255,255,.05));color:var(--ink);
+  border:1px solid color-mix(in srgb,var(--ac) 45%,transparent);transition:.25s;position:relative;overflow:hidden;
+}
+.btn-vote:hover{background:color-mix(in srgb,var(--ac) 34%,rgba(255,255,255,.05));transform:translateY(-1px)}
+.btn-vote.locked{color:var(--dim)}
+.btn-vote.picked{background:var(--grad-gold);border-color:transparent;color:#241703}
+.btn-vote.shake{animation:shake .45s}
+@keyframes shake{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+.btn-vote:disabled{cursor:default;opacity:.85}
+
+/* ============================== recap ============================== */
+.recap{padding:80px 0 60px;text-align:center}
+.recap p.lead{color:var(--dim);margin-top:12px;font-size:15px;font-weight:300}
+.ballot{
+  max-width:680px;margin:36px auto 0;border:1px solid var(--gold4);border-radius:20px;
+  background:linear-gradient(170deg,rgba(232,182,76,.07),rgba(255,255,255,.02) 45%);
+  padding:10px 26px;position:relative;
+}
+.ballot::before,.ballot::after{ /* ticket notches */
+  content:"";position:absolute;top:50%;width:22px;height:22px;border-radius:99px;background:var(--bg);
+  border:1px solid var(--gold4);transform:translateY(-50%);
+}
+.ballot::before{left:-12px;border-left-color:transparent}
+.ballot::after{right:-12px;border-right-color:transparent}
+.brow{display:flex;align-items:center;gap:13px;padding:13px 4px;border-bottom:1px dashed rgba(232,182,76,.2);text-align:left}
+.brow:last-child{border-bottom:none}
+.brow .ic{font-size:19px;flex:none}
+.brow .c{font-size:10.5px;letter-spacing:.14em;color:var(--faint);font-weight:700;text-transform:uppercase}
+.brow .p{font-size:13.5px;font-weight:600;margin-top:1px}
+.brow .p.empty{color:var(--faint);font-weight:400;font-style:italic}
+.brow .chg{margin-left:auto;font-size:11px;color:var(--dim);text-decoration:none;border-bottom:1px dotted var(--faint);white-space:nowrap}
+.brow .chg:hover{color:var(--gold1)}
+.recap .btn-gold:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.recap .note{font-size:11.5px;color:var(--faint);margin-top:14px}
+
+/* ============================== footer ============================== */
+footer{border-top:1px solid var(--line);padding:38px 0 46px;margin-top:30px}
+footer .f{max-width:820px;margin:0 auto;text-align:center;font-size:11.5px;color:var(--faint);line-height:1.8}
+footer .reset{color:var(--faint);text-decoration:underline dotted;cursor:pointer;background:none;border:none;font-size:11.5px}
+footer .reset:hover{color:var(--red2)}
+
+/* ============================== modals ============================== */
+.modal{
+  position:fixed;inset:0;z-index:110;display:none;place-items:center;padding:20px;
+  background:rgba(4,4,9,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+}
+.modal.open{display:grid}
+.sheet{
+  width:min(560px,100%);max-height:92vh;overflow-y:auto;border-radius:22px;position:relative;
+  border:1px solid var(--line2);background:#0d0d17;padding:34px 34px 30px;
+  box-shadow:0 30px 90px rgba(0,0,0,.7);animation:rise .4s cubic-bezier(.2,1.2,.3,1);
+}
+@keyframes rise{from{transform:translateY(26px) scale(.97);opacity:0}}
+.sheet.wide{width:min(760px,100%)}
+.x{
+  position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:99px;border:1px solid var(--line);
+  background:var(--panel);color:var(--dim);font-size:15px;line-height:1;
+}
+.x:hover{color:var(--ink);border-color:var(--line2)}
+.sheet h3{font-family:var(--serif);font-weight:900;font-size:27px}
+.sheet .sub{color:var(--dim);font-size:14px;margin-top:8px;font-weight:300}
+.sheet .sub b{color:var(--ink);font-weight:600}
+
+/* golden ticket art */
+.ticket{
+  margin:24px auto 6px;max-width:400px;border-radius:16px;padding:20px 22px;position:relative;
+  background:linear-gradient(120deg,#5b4310,#c99b3f 30%,#f1d489 50%,#c99b3f 70%,#5b4310);
+  color:#2a1c04;box-shadow:0 14px 44px rgba(232,182,76,.28);
+  transition:filter .5s;
+}
+.ticket.locked-art{filter:grayscale(.92) brightness(.62)}
+.ticket .tk-top{display:flex;justify-content:space-between;font-size:9px;font-weight:800;letter-spacing:.22em}
+.ticket .tk-title{font-family:var(--serif);font-weight:900;font-size:24px;letter-spacing:.02em;margin-top:8px}
+.ticket .tk-sub{font-size:10.5px;font-weight:700;letter-spacing:.3em;margin-top:2px}
+.ticket .tk-btm{display:flex;justify-content:space-between;align-items:flex-end;margin-top:16px}
+.ticket .tk-no{font-size:12px;font-weight:800;letter-spacing:.12em}
+.ticket .tk-name{font-size:11px;font-weight:600;max-width:55%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ticket .edge{position:absolute;left:10px;right:10px;height:0;border-top:2px dashed rgba(42,28,4,.35)}
+.ticket .edge.t{top:6px}.ticket .edge.b{bottom:6px}
+.punch{
+  position:absolute;top:-12px;right:34px;width:34px;height:34px;border-radius:99px;background:var(--bg);
+  border:2px solid #3a2a08;display:none;place-items:center;font-size:13px;color:var(--gold1);
+}
+.ticket.punched .punch{display:grid;animation:punchin .5s cubic-bezier(.2,2.4,.4,1)}
+@keyframes punchin{from{transform:scale(2.6) rotate(40deg);opacity:0}}
+.tk-form{margin-top:22px;display:flex;flex-direction:column;gap:11px}
+.tk-form label{font-size:11px;letter-spacing:.14em;font-weight:700;color:var(--dim);text-transform:uppercase}
+.tk-form input{
+  width:100%;background:rgba(255,255,255,.05);border:1px solid var(--line2);border-radius:11px;
+  color:var(--ink);padding:12px 14px;font-size:14px;font-family:inherit;
+}
+.tk-form input:focus{outline:none;border-color:var(--gold3);box-shadow:0 0 0 3px rgba(232,182,76,.15)}
+.tk-or{display:flex;align-items:center;gap:12px;color:var(--faint);font-size:11px;letter-spacing:.2em;margin:6px 0}
+.tk-or::before,.tk-or::after{content:"";flex:1;height:1px;background:var(--line)}
+.tk-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.tk-actions .btn{flex:1;padding:13px 16px;font-size:13px;min-width:150px}
+.btn-soft{border:1px solid var(--line2);background:var(--panel);color:var(--ink)}
+.btn-soft:hover{border-color:var(--gold3)}
+.tk-hint{font-size:11px;color:var(--faint);margin-top:12px;text-align:center}
+.tk-hint code{color:var(--gold1);background:rgba(232,182,76,.1);padding:1px 6px;border-radius:5px}
+.tk-error{color:#ff8a96;font-size:12px;display:none}
+.tk-error.show{display:block;animation:shake .4s}
+.pending-box{text-align:center;padding:14px 0 4px}
+.pending-box .big{font-size:44px;animation:pulse 1.6s infinite}
+.pending-box p{color:var(--dim);font-size:14px;margin-top:10px;line-height:1.6}
+.pending-box p b{color:var(--ink)}
+
+/* facebook connect (demo) */
+.btn-fb{background:#1877F2;color:#fff;padding:13px 18px;font-size:14px;border-radius:11px;width:100%}
+.btn-fb:hover{background:#3b8bf4;transform:translateY(-1px)}
+.btn-fb .f{width:22px;height:22px;border-radius:99px;background:#fff;color:#1877F2;font-weight:900;
+  display:inline-grid;place-items:center;font-size:15px;font-family:Georgia,serif}
+.fb-id{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line2);
+  border-radius:12px;background:var(--panel);text-align:left}
+.fb-av{width:38px;height:38px;border-radius:99px;background:#1877F2;color:#fff;font-weight:800;
+  display:grid;place-items:center;font-size:16px;flex:none}
+.linklike{background:none;border:none;color:var(--gold1);font-size:11px;padding:0;text-decoration:underline dotted}
+.fb-bar{display:flex;align-items:center;gap:10px;background:#1877F2;color:#fff;font-weight:700;
+  padding:14px 18px;font-size:14px;border-radius:22px 22px 0 0}
+.fb-bar .fb-logo{width:24px;height:24px;border-radius:99px;background:#fff;color:#1877F2;font-weight:900;
+  display:grid;place-items:center;font-family:Georgia,serif;flex:none}
+.fb-perms{list-style:none;margin:10px 0 16px;padding:12px 14px;border:1px solid var(--line);
+  border-radius:11px;background:var(--panel);font-size:13.5px;color:var(--dim)}
+
+/* watch modal */
+.player{position:relative;border-radius:14px;overflow:hidden;background:#000;aspect-ratio:16/9;margin-top:18px}
+.player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.watch-fallback{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
+.watch-fallback .fb{font-size:12px;color:var(--faint)}
+
+/* toast */
+.toast{
+  position:fixed;left:50%;bottom:26px;transform:translate(-50%,80px);z-index:140;opacity:0;
+  background:#15151f;border:1px solid var(--gold4);color:var(--ink);font-size:13.5px;font-weight:600;
+  border-radius:99px;padding:12px 22px;transition:.4s cubic-bezier(.2,1,.3,1);box-shadow:0 10px 40px rgba(0,0,0,.6);
+  max-width:92vw;text-align:center;
+}
+.toast.show{transform:translate(-50%,0);opacity:1}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(20px)}
+.rv.in{opacity:1;transform:none;transition:opacity .7s,transform .7s cubic-bezier(.2,.7,.2,1)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<canvas id="fx"></canvas>
+
+<!-- ================= HUD ================= -->
+<header class="hud">
+  <div class="wrap hud-in">
+    <a class="brand" href="#top"><span class="tro">🏆</span><span class="goldtext">NETTY&nbsp;AWARDS&nbsp;’26</span></a>
+    <div class="hud-progress" id="hudProgress" title="Your ballot progress">
+      <div class="dots" id="hudDots"></div>
+      <span class="hud-label" id="hudLabel">0/8 categories</span>
+    </div>
+    <div class="hud-right">
+      <button class="chip" id="ticketChip">🎟 <span id="ticketChipTxt">Ticket: locked</span></button>
+      <a class="btn btn-donate" id="hudDonate" target="_blank" rel="noopener">❤️ Donate</a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="beam l"></div><div class="beam r"></div>
+  <div class="wrap">
+    <div class="marquee" aria-hidden="true"></div>
+    <p class="kicker">Network Media presents</p>
+    <h1>The Netty<br>Awards</h1>
+    <span class="year">2026</span>
+    <p class="sub">One year of scroll-stopping videos. <b id="statViewsInline">4.6 billion</b> views.
+      Forty nominees picked by the numbers — and <b>one winner per category picked by you</b>.</p>
+    <div class="statrow" id="statrow">
+      <div class="stat"><div class="n goldtext" data-count id="statCats">0</div><div class="l">CATEGORIES</div></div>
+      <div class="stat"><div class="n goldtext" data-count id="statNoms">0</div><div class="l">NOMINEES</div></div>
+      <div class="stat"><div class="n goldtext" id="statViews">0</div><div class="l">COMBINED VIEWS</div></div>
+      <div class="stat"><div class="n goldtext">1</div><div class="l">GOLDEN TICKET = YOUR VOTE</div></div>
+    </div>
+    <div class="ctarow">
+      <button class="btn btn-gold btn-big" id="heroTicket">🎟 Get your Golden Ticket</button>
+      <a class="btn btn-ghost btn-big" href="#categories">Meet the nominees ↓</a>
+    </div>
+    <p class="countdown">Voting closes <span id="closesDate"></span>
+      <span class="t" id="countdown">— : — : — : —</span><br>
+      <span style="opacity:.75">Winners revealed live · <span class="goldtext" id="winnersLine"></span></span></p>
+    <div class="marquee btm" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ================= ST. JUDE GATE ================= -->
+<section class="stjude" id="stjude">
+  <div class="wrap">
+    <div class="sj-head rv">
+      <p class="overline">❤️ For St. Jude Children’s Research Hospital</p>
+      <h2>Your vote is a <span class="goldtext">gift</span></h2>
+      <p>The Netty ballot box opens one way: with a donation — <b>any amount</b> — to Network
+         Media’s St. Jude fundraiser. The kids win before a single envelope is opened.</p>
+    </div>
+    <div class="steps">
+      <div class="step rv"><span class="num">1</span><div class="ic">💝</div>
+        <h3>Donate any amount</h3>
+        <p>Give what feels right on our Facebook fundraiser. $5 or $500 — one donation is one Golden Ticket.</p></div>
+      <div class="step rv"><span class="num">2</span><div class="ic">🎟</div>
+        <h3>Claim your Golden Ticket</h3>
+        <p>Connect with Facebook so we know it’s really you — no password, no posting rights, and no way to
+        impersonate another donor. Our team matches your identity against the donor list and your ballot
+        unlocks automatically.</p></div>
+      <div class="step rv"><span class="num">3</span><div class="ic">🗳</div>
+        <h3>Vote in all 8 categories</h3>
+        <p>Punch your ticket, back your favorites, seal your ballot. Winners are revealed live at the Netty&nbsp;Awards&nbsp;Show on September&nbsp;14.</p></div>
+    </div>
+    <div class="meter-card rv">
+      <div class="meter-top"><span>Community goal <span class="demo-tag">DEMO&nbsp;VALUES</span></span><b><span id="raisedTxt">$0</span> <span style="font-size:12px;color:var(--dim)">of <span id="goalTxt"></span></span></b></div>
+      <div class="meter"><div class="fill" id="meterFill"></div></div>
+      <div class="meter-sub"><span id="donorsTxt"></span><span>100% goes to St. Jude via Facebook</span></div>
+    </div>
+    <div class="sj-ctas rv">
+      <a class="btn btn-donate btn-big" id="sjDonate" target="_blank" rel="noopener">❤️ Donate on Facebook ↗</a>
+      <button class="btn btn-ghost btn-big" id="sjClaim">🎟 I already donated</button>
+    </div>
+    <p class="fineprint rv">Donations go directly to St. Jude through Facebook’s fundraiser — Network Media never
+      handles the money. <b>Facebook Login proves who you are</b>; a teammate then matches you against the
+      fundraiser’s donor list (Facebook offers no donations API, so a human double-checks) and your ballot
+      unlocks automatically. Your private Meta&nbsp;Pay receipt # speeds up matching and covers anonymous gifts.
+      Codes are single-use.</p>
+  </div>
+</section>
+
+<!-- ================= CATEGORIES ================= -->
+<main class="cats" id="categories">
+  <div class="wrap">
+    <div class="cats-head rv">
+      <p class="overline" style="color:var(--gold2)">The ballot</p>
+      <h2>Eight categories.<br><span class="goldtext">Five heavyweights each.</span></h2>
+      <p>Nominees are seeded straight from the data — the five most-watched videos in every genre from
+        the past 12 months. No committees, no politics. Just the scroll, quantified.</p>
+    </div>
+    <nav class="catbar" id="catbar"></nav>
+    <div id="catsMount"></div>
+  </div>
+</main>
+
+<!-- ================= RECAP / SUBMIT ================= -->
+<section class="recap" id="recap">
+  <div class="wrap">
+    <p class="overline" style="color:var(--gold2)">Almost there</p>
+    <h2>Your <span class="goldtext">ballot</span></h2>
+    <p class="lead">Change picks anytime before you seal it. Ties are broken live on stage — chaotically.</p>
+    <div class="ballot" id="ballotMount"></div>
+    <div style="margin-top:30px">
+      <button class="btn btn-gold btn-big" id="submitBtn" disabled>🧧 Seal my ballot</button>
+    </div>
+    <p class="note" id="submitNote">Vote in all 8 categories to seal your ballot.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap f">
+    <p><b class="goldtext">THE NETTY AWARDS</b> · a Network Media community event</p>
+    <p style="margin-top:10px">Nominees are seeded automatically from Network Media video data: the top 5 videos by
+      lifetime views in each genre, published <span id="ftWindow"></span>. View counts seed nominations —
+      your votes crown winners. Voting requires a verified donation of any amount to our St. Jude fundraiser.
+      St. Jude Children’s Research Hospital is not a sponsor of and does not endorse the Netty Awards.</p>
+    <p style="margin-top:10px">Demo build — votes live in your browser only. <button class="reset" id="resetDemo">Reset demo state</button></p>
+  </div>
+</footer>
+
+<!-- ================= TICKET MODAL ================= -->
+<div class="modal" id="ticketModal" role="dialog" aria-modal="true" aria-label="Golden Ticket">
+  <div class="sheet">
+    <button class="x" data-close>✕</button>
+
+    <div data-tkview="locked">
+      <h3>Get your <span class="goldtext">Golden Ticket</span></h3>
+      <p class="sub">One donation to St. Jude — any amount — unlocks your ballot for all 8 categories.</p>
+      <div class="ticket locked-art" id="tkArtLocked">
+        <div class="edge t"></div>
+        <div class="tk-top"><span>NETWORK MEDIA</span><span>ADMIT ONE</span></div>
+        <div class="tk-title">GOLDEN TICKET</div>
+        <div class="tk-sub">2026 NETTY AWARDS · OFFICIAL BALLOT</div>
+        <div class="tk-btm"><span class="tk-no">№ NM-????</span><span class="tk-name">unverified</span></div>
+        <div class="edge b"></div>
+      </div>
+      <div class="tk-actions" style="margin-top:22px">
+        <a class="btn btn-donate" id="tkDonate" target="_blank" rel="noopener">❤️ Step 1 · Donate on Facebook ↗</a>
+      </div>
+      <div class="tk-or">STEP 2 · PROVE IT’S YOU</div>
+      <div class="tk-form">
+        <div id="fbConnectRow">
+          <button class="btn btn-fb" id="fbConnect"><span class="f">f</span> Continue with Facebook</button>
+          <p class="tk-hint" style="margin-top:8px;text-align:left">We only receive your public name and photo — never your
+            password, never posting rights. Nobody can “Continue” as you, so nobody can claim your donation.
+            <b>Demo: no real Facebook connection is made.</b></p>
+        </div>
+        <div id="fbConnectedRow" style="display:none">
+          <div class="fb-id">
+            <span class="fb-av" id="fbAv">?</span>
+            <div style="min-width:0">
+              <div style="font-weight:700" id="fbWho">—</div>
+              <div style="font-size:11px;color:var(--dim)">Connected with Facebook ·
+                <button class="linklike" id="fbSwitch">switch account</button></div>
+            </div>
+            <span style="margin-left:auto;color:#4ade80;font-weight:700;font-size:13px">✓</span>
+          </div>
+        </div>
+        <div>
+          <label for="tkReceipt">Meta Pay receipt # <span style="opacity:.6;text-transform:none;letter-spacing:0">(optional — speeds up matching; use it if you donated anonymously)</span></label>
+          <input id="tkReceipt" type="text" placeholder="e.g. 2417-8390-1146" autocomplete="off">
+        </div>
+        <div class="tk-actions">
+          <button class="btn btn-gold" id="tkRequest" style="flex:1">🎟 Step 3 · Request my Golden Ticket</button>
+        </div>
+        <div class="tk-or">GOT A CODE FROM THE TEAM?</div>
+        <div>
+          <label for="tkCode">Golden Ticket code</label>
+          <input id="tkCode" type="text" placeholder="NM-XXXX" autocomplete="off">
+          <p class="tk-error" id="tkError">Hmm, that code doesn’t match. Check your DMs — or request a ticket above.</p>
+        </div>
+        <div class="tk-actions">
+          <button class="btn btn-soft" id="tkRedeem" style="flex:1">Punch my ticket</button>
+        </div>
+        <p class="tk-hint">Demo build: code <code>NETTY26</code> unlocks instantly · the team side lives in the
+          <a href="admin.html" target="_blank" style="color:var(--gold1)">Team Console</a>.</p>
+      </div>
+    </div>
+
+    <div data-tkview="pending" style="display:none">
+      <h3>Checking the list <span class="goldtext">twice</span></h3>
+      <div class="pending-box">
+        <div class="big">🕵️</div>
+        <p><b id="pendingName">Your name</b> is in the team’s queue. They’re matching your Facebook identity
+          against the fundraiser’s donor list — the moment it checks out, your ballot <b>unlocks right here,
+          automatically</b>. Usually within a few hours.</p>
+        <p style="font-size:12px;color:var(--faint);margin-top:12px">Testing the team side? Open the
+          <a href="admin.html" target="_blank" style="color:var(--gold1)">Team Console</a> in a new tab and
+          approve this request — watch this page react.</p>
+        <div class="tk-actions" style="margin-top:20px;justify-content:center">
+          <button class="btn btn-soft" id="simApprove">✨ Simulate team approval <span class="demo-tag">DEMO</span></button>
+        </div>
+      </div>
+    </div>
+
+    <div data-tkview="unlocked" style="display:none">
+      <h3>You’re <span class="goldtext">in</span> 🎉</h3>
+      <p class="sub">Ticket punched. The ballot box is yours — thank you for giving to St. Jude.</p>
+      <div class="ticket punched" id="tkArtGold">
+        <span class="punch">★</span>
+        <div class="edge t"></div>
+        <div class="tk-top"><span>NETWORK MEDIA</span><span>ADMIT ONE</span></div>
+        <div class="tk-title">GOLDEN TICKET</div>
+        <div class="tk-sub">2026 NETTY AWARDS · OFFICIAL BALLOT</div>
+        <div class="tk-btm"><span class="tk-no" id="tkNoTxt">№ NM-0000</span><span class="tk-name" id="tkNameTxt"></span></div>
+        <div class="edge b"></div>
+      </div>
+      <div class="tk-actions" style="margin-top:22px">
+        <button class="btn btn-gold" id="tkStartVoting">Start voting →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= WATCH MODAL ================= -->
+<div class="modal" id="watchModal" role="dialog" aria-modal="true" aria-label="Watch video">
+  <div class="sheet wide">
+    <button class="x" data-close>✕</button>
+    <h3 id="watchTitle" style="font-size:21px;padding-right:30px"></h3>
+    <p class="sub" id="watchMeta"></p>
+    <div class="player" id="playerMount"></div>
+    <div class="watch-fallback">
+      <span class="fb">Not playing? Log into Facebook in this browser — some videos only roll for logged-in viewers.</span>
+      <a class="btn btn-soft" id="watchFbLink" target="_blank" rel="noopener" style="padding:10px 18px;font-size:12.5px">Watch on Facebook ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================= SEALED RECAP MODAL ================= -->
+<div class="modal" id="sealModal" role="dialog" aria-modal="true" aria-label="Ballot sealed">
+  <div class="sheet">
+    <button class="x" data-close>✕</button>
+    <h3 style="text-align:center">Ballot <span class="goldtext">sealed</span> 🏆</h3>
+    <p class="sub" style="text-align:center">You backed 8 nominees and one very good cause.<br>
+      Winners revealed live at <b>the Netty Awards Show · September 14</b>.</p>
+    <div class="ballot" id="sealBallot" style="margin-top:22px"></div>
+    <div class="tk-actions" style="margin-top:22px">
+      <button class="btn btn-gold" id="copyShare">📋 Copy share text</button>
+      <a class="btn btn-donate" id="sealDonate" target="_blank" rel="noopener">❤️ Give again</a>
+    </div>
+  </div>
+</div>
+
+<!-- ================= MOCK FACEBOOK LOGIN (DEMO) ================= -->
+<div class="modal" id="fbModal" role="dialog" aria-modal="true" aria-label="Facebook Login demo">
+  <div class="sheet" style="width:min(430px,100%);padding:0;overflow:hidden">
+    <div class="fb-bar"><span class="fb-logo">f</span> Log in with Facebook
+      <span class="demo-tag" style="margin-left:auto">DEMO</span></div>
+    <div style="padding:24px 26px 26px">
+      <p style="font-weight:700;font-size:16px">The Netty Awards wants to:</p>
+      <ul class="fb-perms">
+        <li>👤 Receive your name and profile picture</li>
+      </ul>
+      <div class="tk-form">
+        <div>
+          <label for="fbName">Your Facebook name <span style="opacity:.6;text-transform:none;letter-spacing:0">(type anything — this is a mock)</span></label>
+          <input id="fbName" type="text" placeholder="e.g. Jamie Rivera" autocomplete="off">
+        </div>
+        <div class="tk-actions">
+          <button class="btn btn-fb" id="fbContinue" style="flex:1">Continue</button>
+          <button class="btn btn-soft" id="fbCancel">Cancel</button>
+        </div>
+        <p class="tk-hint">Mock of Facebook Login for flow testing — nothing touches Facebook. In production this
+          is the real FB Login dialog and identity can’t be faked.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="netty-data.js"></script>
+<script>
+(() => {
+"use strict";
+
+/* ======================= CONFIG — EDIT ME ======================= */
+const CONFIG = {
+  fundraiser: "https://www.facebook.com/donate/1932255517475401/",
+  votingCloses: "2026-09-06T23:59:59-07:00",
+  winnersLine: "The Netty Awards Show · September 14",
+  demoCode: "NETTY26",          // real build: codes issued from donor list
+  goal: 25000, raised: 6180, donors: 47,   // DEMO numbers — wire to fundraiser
+};
+
+const DATA = window.NETTY_DATA;
+const CATS = DATA.categories;
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const finePointer  = matchMedia("(pointer: fine)").matches;
+
+/* ======================= state ======================= */
+const KEY = "netty26";
+let S = { t: "locked", name: "", no: null, votes: {}, sealed: false };
+try { S = { ...S, ...(JSON.parse(localStorage.getItem(KEY)) || {}) }; } catch (e) {}
+const save = () => localStorage.setItem(KEY, JSON.stringify(S));
+
+/* ======================= helpers ======================= */
+const $  = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtViews = n =>
+  n >= 1e9 ? (n/1e9).toFixed(2).replace(/\.?0+$/,"") + "B" :
+  n >= 1e6 ? (n/1e6 >= 100 ? Math.round(n/1e6) : (n/1e6).toFixed(1).replace(/\.0$/,"")) + "M" :
+  n >= 1e3 ? Math.round(n/1e3) + "K" : String(n);
+const fmtMoney = n => "$" + n.toLocaleString("en-US");
+const fmtDate = iso => new Date(iso + "T12:00:00")
+  .toLocaleDateString("en-US", { month:"short", year:"2-digit" }).replace(" ", " ’");
+const votesCount = () => Object.keys(S.votes).length;
+
+function toast(msg) {
+  const t = $("#toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(t._h);
+  t._h = setTimeout(() => t.classList.remove("show"), 2600);
+}
+
+/* ======================= confetti / ambient fx ======================= */
+const cv = $("#fx"), cx = cv.getContext("2d");
+let parts = [], fxOn = false;
+function fit() { cv.width = innerWidth * devicePixelRatio; cv.height = innerHeight * devicePixelRatio; cx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0); }
+addEventListener("resize", fit); fit();
+
+function spawn(x, y, opts={}) {
+  const colors = opts.colors || ["#f7d977","#e8b64c","#fff3c4","#c9932a","#ffffff"];
+  parts.push({
+    x, y,
+    vx: (Math.random()-.5) * (opts.spread ?? 11),
+    vy: -(Math.random() * (opts.up ?? 9) + 3),
+    w: Math.random()*7+4, h: Math.random()*4+3,
+    rot: Math.random()*Math.PI, vr: (Math.random()-.5)*.3,
+    color: colors[Math.random()*colors.length|0],
+    circle: Math.random() < .25,
+    life: 0, ttl: opts.ttl ?? (Math.random()*60+90),
+  });
+}
+function burst(x, y, n=70, colors) { if (reduceMotion) return; for (let i=0;i<n;i++) spawn(x,y,{colors}); pump(); }
+function rain(n=220, colors) {
+  if (reduceMotion) return;
+  let i = 0;
+  const iv = setInterval(() => {
+    for (let k=0;k<8;k++,i++) spawn(Math.random()*innerWidth, -12, {colors, spread:5, up:-2, ttl:190});
+    if (i >= n) clearInterval(iv);
+  }, 50);
+  pump();
+}
+function pump() {
+  if (fxOn) return; fxOn = true;
+  (function loop() {
+    cx.clearRect(0,0,innerWidth,innerHeight);
+    parts = parts.filter(p => p.life < p.ttl && p.y < innerHeight + 30);
+    for (const p of parts) {
+      p.life++; p.x += p.vx; p.y += p.vy;
+      if (!p.dust) p.vy += .22;
+      p.vx *= .99; p.rot += p.vr;
+      cx.save(); cx.translate(p.x,p.y); cx.rotate(p.rot);
+      cx.globalAlpha = Math.max(0, 1 - p.life/p.ttl * 1.1);
+      cx.fillStyle = p.color;
+      if (p.circle) { cx.beginPath(); cx.arc(0,0,p.w/2,0,7); cx.fill(); }
+      else cx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      cx.restore();
+    }
+    if (parts.length) requestAnimationFrame(loop); else { fxOn = false; cx.clearRect(0,0,innerWidth,innerHeight); }
+  })();
+}
+/* slow golden dust rising from the floor */
+if (!reduceMotion) setInterval(() => {
+  if (document.hidden || parts.length > 160) return;
+  parts.push({
+    x: Math.random()*innerWidth, y: innerHeight + 8,
+    vx: (Math.random()-.5)*.4, vy: -(Math.random()*.7+.35),
+    w: Math.random()*2.6+1.2, h: 2, rot: 0, vr: 0,
+    color: "rgba(232,182,76,.8)", circle: true, life: 0, ttl: 460,
+  });
+  // dust ignores gravity: flag via negative vr? simpler — patch in loop below
+  parts[parts.length-1].dust = true;
+  pump();
+}, 380);
+
+/* ======================= HUD ======================= */
+const hudDots = $("#hudDots");
+CATS.forEach(c => {
+  const i = document.createElement("i");
+  i.dataset.cat = c.key; i.title = c.label;
+  hudDots.appendChild(i);
+});
+function renderHud() {
+  $$("#hudDots i").forEach(i => {
+    const on = !!S.votes[i.dataset.cat];
+    if (on && !i.classList.contains("on")) { i.classList.add("on","pop"); setTimeout(()=>i.classList.remove("pop"),600); }
+    if (!on) i.classList.remove("on");
+  });
+  $("#hudLabel").textContent = S.sealed ? "Ballot sealed 🧧" : `${votesCount()}/${CATS.length} categories`;
+  const chip = $("#ticketChip"), txt = $("#ticketChipTxt");
+  chip.classList.remove("gold","pending");
+  if (S.t === "unlocked") { chip.classList.add("gold"); txt.textContent = S.no; }
+  else if (S.t === "pending") { chip.classList.add("pending"); txt.innerHTML = `<span class="tick">Verifying…</span>`; }
+  else txt.textContent = "Ticket: locked";
+}
+
+/* ======================= hero ======================= */
+$("#statCats").dataset.target = CATS.length;
+$("#statNoms").dataset.target = CATS.reduce((a,c) => a + c.nominees.length, 0);
+const totalViews = CATS.reduce((a,c) => a + c.totalViews, 0);
+$("#statViews").textContent = fmtViews(totalViews);
+$("#statViewsInline").textContent = (totalViews/1e9).toFixed(1) + " billion";
+$("#hudDonate").href = $("#sjDonate").href = $("#tkDonate").href = $("#sealDonate").href = CONFIG.fundraiser;
+
+const closes = new Date(CONFIG.votingCloses);
+$("#closesDate").textContent = closes.toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+$("#winnersLine").textContent = CONFIG.winnersLine;
+(function tick() {
+  let ms = closes - Date.now();
+  const el = $("#countdown");
+  if (ms <= 0) { el.textContent = "VOTING CLOSED"; return; }
+  const d = ms/864e5|0, h = ms/36e5%24|0, m = ms/6e4%60|0, s = ms/1e3%60|0;
+  el.textContent = `${d}d : ${String(h).padStart(2,"0")}h : ${String(m).padStart(2,"0")}m : ${String(s).padStart(2,"0")}s`;
+  setTimeout(tick, 1000);
+})();
+
+/* count-up for the small stats */
+function countUp(el, target, dur=900) {
+  if (reduceMotion) { el.textContent = target; return; }
+  const t0 = performance.now();
+  (function step(t) {
+    const k = Math.min(1, (t-t0)/dur), e = 1 - Math.pow(1-k, 3);
+    el.textContent = Math.round(target * e);
+    if (k < 1) requestAnimationFrame(step);
+  })(t0);
+}
+
+/* ======================= fundraiser meter ======================= */
+$("#goalTxt").textContent = fmtMoney(CONFIG.goal);
+$("#donorsTxt").textContent = `${CONFIG.donors} golden tickets issued`;
+
+/* ======================= categories ======================= */
+const mount = $("#catsMount"), catbar = $("#catbar");
+CATS.forEach((c, ci) => {
+  const a = document.createElement("a");
+  a.href = `#cat-${c.key}`; a.dataset.cat = c.key;
+  a.textContent = `${c.icon} ${c.label}`;
+  catbar.appendChild(a);
+
+  const sec = document.createElement("section");
+  sec.className = "cat"; sec.id = `cat-${c.key}`;
+  sec.style.setProperty("--ac", c.accent);
+  sec.innerHTML = `
+    <div class="cat-head rv">
+      <div class="medal">${c.icon}</div>
+      <div>
+        <h3>${esc(c.label)}</h3>
+        <p class="tagline">${esc(c.tag)}</p>
+      </div>
+      <div class="cat-meta">
+        <span class="pill">Genre: ${esc(c.genre)}</span>
+        <span class="pill">${fmtViews(c.totalViews)} combined views</span>
+        <span class="seal">✓ VOTED</span>
+      </div>
+    </div>
+    <div class="noms">
+      ${c.nominees.map((n, i) => `
+        <article class="card rv" data-cat="${c.key}" data-vid="${esc(n.id)}" style="transition-delay:${i*60}ms">
+          <span class="pickflag">★ YOUR PICK</span>
+          <div class="poster" data-watch role="button" tabindex="0" aria-label="Watch ${esc(n.title)}">
+            <span class="ghost">${i+1}</span>
+            <span class="em">${c.icon}</span>
+            ${n.reel ? '<span class="reel">REEL</span>' : ""}
+            <span class="rank">${i === 0 ? "👑 TOP SEED" : "SEED #" + (i+1)}</span>
+            <span class="play"><span>▶</span></span>
+          </div>
+          <div class="card-bd">
+            <h4 class="vtitle">${esc(n.title)}</h4>
+            <p class="vcreator"><span class="dot"></span>${esc(n.creator)}</p>
+            <div class="vmeta">
+              <span class="views" data-views="${n.views}">▶ 0</span>
+              ${n.len ? `<span>${n.len}</span>` : ""}
+              <span>${fmtDate(n.date)}</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn-watch" data-watch>▶ Watch</button>
+              <button class="btn-vote" data-vote>VOTE</button>
+            </div>
+          </div>
+        </article>`).join("")}
+    </div>`;
+  mount.appendChild(sec);
+});
+
+/* ======================= voting ======================= */
+function renderVotes() {
+  CATS.forEach(c => {
+    const sec = $(`#cat-${c.key}`), pick = S.votes[c.key];
+    sec.classList.toggle("voted", !!pick);
+    const barLink = $(`.catbar a[data-cat="${c.key}"]`);
+    barLink.classList.toggle("done", !!pick);
+    barLink.textContent = `${pick ? "✓" : c.icon} ${c.label}`;
+    $$(".card", sec).forEach(card => {
+      const mine = card.dataset.vid === pick;
+      card.classList.toggle("picked", mine);
+      const b = $(".btn-vote", card);
+      b.classList.toggle("picked", mine);
+      b.classList.toggle("locked", S.t !== "unlocked");
+      b.disabled = S.sealed;
+      b.innerHTML = S.sealed
+        ? (mine ? "✓ SEALED" : "CLOSED")
+        : mine ? "✓ YOUR PICK"
+        : S.t === "unlocked" ? "VOTE"
+        : "🔒 VOTE";
+    });
+  });
+  renderHud(); renderBallot();
+}
+
+mount.addEventListener("click", e => {
+  const voteBtn = e.target.closest("[data-vote]");
+  const watchEl = e.target.closest("[data-watch]");
+  const card = e.target.closest(".card");
+  if (!card) return;
+  const catKey = card.dataset.cat, vid = card.dataset.vid;
+  const cat = CATS.find(c => c.key === catKey);
+  const nom = cat.nominees.find(n => n.id === vid);
+
+  if (watchEl) { openWatch(cat, nom); return; }
+  if (!voteBtn) return;
+
+  if (S.sealed) { toast("Your ballot is sealed — winners drop at the Netty Awards Show, Sept 14 🏆"); return; }
+  if (S.t !== "unlocked") {
+    voteBtn.classList.add("shake");
+    setTimeout(() => voteBtn.classList.remove("shake"), 500);
+    toast("🔒 The ballot box needs a Golden Ticket — one St. Jude donation unlocks it");
+    setTimeout(() => openTicket(), 650);
+    return;
+  }
+  const already = S.votes[catKey] === vid;
+  if (already) { delete S.votes[catKey]; save(); renderVotes(); toast(`Removed your ${cat.label} pick`); return; }
+  const switching = !!S.votes[catKey];
+  S.votes[catKey] = vid; save(); renderVotes();
+  const r = voteBtn.getBoundingClientRect();
+  burst(r.left + r.width/2, r.top + r.height/2, 60, ["#f7d977","#fff3c4", cat.accent, "#ffffff"]);
+  const left = CATS.length - votesCount();
+  toast(switching ? `Switched to “${nom.title.slice(0,42)}…” ✨`
+      : left === 0 ? "That’s all 8! Scroll down to seal your ballot 🧧"
+      : `Locked in for ${cat.label} — ${left} to go`);
+});
+/* keyboard access for posters */
+mount.addEventListener("keydown", e => {
+  if ((e.key === "Enter" || e.key === " ") && e.target.matches(".poster")) {
+    e.preventDefault(); e.target.closest(".card") && e.target.click();
+  }
+});
+
+/* ======================= ballot recap ======================= */
+function ballotRows() {
+  return CATS.map(c => {
+    const pick = c.nominees.find(n => n.id === S.votes[c.key]);
+    return `<div class="brow">
+      <span class="ic">${c.icon}</span>
+      <div style="min-width:0">
+        <div class="c">${esc(c.label)}</div>
+        <div class="p ${pick ? "" : "empty"}">${pick ? esc(pick.title) + " · " + esc(pick.creator) : "no pick yet"}</div>
+      </div>
+      ${S.sealed ? "" : `<a class="chg" href="#cat-${c.key}">${pick ? "change" : "vote"} →</a>`}
+    </div>`;
+  }).join("");
+}
+function renderBallot() {
+  $("#ballotMount").innerHTML = ballotRows();
+  const all = votesCount() === CATS.length;
+  const btn = $("#submitBtn");
+  btn.disabled = !all || S.sealed;
+  btn.innerHTML = S.sealed ? "🧧 Ballot sealed — thank you!" : "🧧 Seal my ballot";
+  $("#submitNote").textContent = S.sealed
+    ? `Sealed with ticket ${S.no} · winners live at the Netty Awards Show, Sept 14`
+    : all ? "All 8 in. Ready when you are."
+    : `Vote in all ${CATS.length} categories to seal your ballot · ${CATS.length - votesCount()} to go`;
+}
+$("#submitBtn").addEventListener("click", () => {
+  if (S.sealed || votesCount() !== CATS.length) return;
+  S.sealed = true; save(); renderVotes();
+  rain(260);
+  $("#sealBallot").innerHTML = ballotRows();
+  openModal("#sealModal");
+});
+$("#copyShare").addEventListener("click", async () => {
+  const txt = `I just voted in the 2026 Netty Awards 🏆 8 categories, 40 creator legends — all of it for St. Jude ❤️ Grab a Golden Ticket and vote too: ${CONFIG.fundraiser}`;
+  try { await navigator.clipboard.writeText(txt); toast("Share text copied 📋"); }
+  catch (e) { prompt("Copy your share text:", txt); }
+});
+
+/* ======================= golden ticket flow ======================= */
+function tkView(v) {
+  $$("#ticketModal [data-tkview]").forEach(x => x.style.display = x.dataset.tkview === v ? "" : "none");
+  if (v === "locked") renderFbRows();
+  if (v === "unlocked") {
+    $("#tkNoTxt").textContent = "№ " + S.no;
+    $("#tkNameTxt").textContent = S.name || "Golden Ticket holder";
+  }
+  if (v === "pending") $("#pendingName").textContent =
+    (S.name || "Your name") + (S.receipt ? ` (receipt ${S.receipt})` : "");
+}
+function openTicket() { tkView(S.t); openModal("#ticketModal"); }
+const genCode = () => "NM-" + String(Math.floor(1000 + Math.random()*9000));
+function unlock(name, code) {
+  S.t = "unlocked";
+  S.name = name || S.name || "";
+  S.no = code || S.no || genCode();
+  save(); renderVotes(); tkView("unlocked");
+  rain(200);
+  toast(`Golden Ticket ${S.no} punched 🎟 — happy voting!`);
+}
+
+/* --- mock Facebook Login: proves IDENTITY; matching to the donor list stays
+       with the team (FB exposes no fundraiser-donations API) --- */
+const QKEY = "netty26_queue";
+const qload = () => { try { return JSON.parse(localStorage.getItem(QKEY)) || []; } catch (e) { return []; } };
+const qsave = q => localStorage.setItem(QKEY, JSON.stringify(q));
+function renderFbRows() {
+  $("#fbConnectRow").style.display = S.fb ? "none" : "";
+  $("#fbConnectedRow").style.display = S.fb ? "" : "none";
+  if (S.fb) { $("#fbWho").textContent = S.fb.name; $("#fbAv").textContent = S.fb.name.trim()[0].toUpperCase(); }
+}
+function openFb() { $("#fbName").value = S.fb ? S.fb.name : ""; openModal("#fbModal"); $("#fbName").focus(); }
+function closeFb() {
+  $("#fbModal").classList.remove("open");
+  if (!$(".modal.open")) document.body.style.overflow = "";
+}
+$("#fbConnect").addEventListener("click", openFb);
+$("#fbSwitch").addEventListener("click", openFb);
+$("#fbCancel").addEventListener("click", closeFb);
+$("#fbContinue").addEventListener("click", () => {
+  const name = $("#fbName").value.trim();
+  if (!name) { $("#fbName").focus(); return; }
+  S.fb = { name, id: "fb_" + name.toLowerCase().replace(/[^a-z0-9]+/g, "") };
+  save(); closeFb(); renderFbRows();
+  toast(`Connected as ${name} ✓ — identity locked in`);
+});
+$("#fbName").addEventListener("keydown", e => {
+  if (e.key === "Enter" || e.code === "Enter" || e.keyCode === 13) { e.preventDefault(); $("#fbContinue").click(); }
+});
+
+$("#ticketChip").addEventListener("click", openTicket);
+$("#heroTicket").addEventListener("click", () => S.t === "unlocked" ? scrollToCats() : openTicket());
+$("#sjClaim").addEventListener("click", openTicket);
+$("#tkRedeem").addEventListener("click", () => {
+  const code = $("#tkCode").value.trim().toUpperCase();
+  if (code && (code === CONFIG.demoCode || /^NM-\d{4}$/.test(code))) {
+    $("#tkError").classList.remove("show");
+    unlock(S.fb ? S.fb.name : S.name, /^NM-\d{4}$/.test(code) ? code : null);
+  } else {
+    $("#tkError").classList.add("show");
+  }
+});
+["tkReceipt","tkCode"].forEach(id => $("#"+id).addEventListener("keydown", e => {
+  if (e.key !== "Enter" && e.code !== "Enter" && e.keyCode !== 13) return;
+  e.preventDefault();
+  ($("#tkCode").value.trim() ? $("#tkRedeem") : $("#tkRequest")).click();
+}));
+$("#tkRequest").addEventListener("click", () => {
+  if (!S.fb) { openFb(); toast("Connect with Facebook first — that’s your proof of identity 🔐"); return; }
+  const receipt = $("#tkReceipt").value.trim();
+  const q = qload();
+  let entry = q.find(x => x.fbId === S.fb.id);
+  if (!entry) {
+    entry = { fbId: S.fb.id, fbName: S.fb.name, receipt, ts: Date.now(), status: "pending", code: null };
+    q.push(entry);
+  } else {
+    entry.fbName = S.fb.name;
+    if (receipt) entry.receipt = receipt;
+    if (entry.status === "rejected") entry.status = "pending";
+  }
+  qsave(q);
+  S.t = "pending"; S.name = S.fb.name; S.receipt = receipt; save(); renderHud(); tkView("pending");
+});
+/* the ballot unlocks the moment the team approves — storage events make it live across tabs */
+function checkQueue() {
+  if (!S.fb || S.t !== "pending") return;
+  const entry = qload().find(x => x.fbId === S.fb.id);
+  if (!entry) return;
+  if (entry.status === "approved") {
+    unlock(entry.fbName, entry.code);
+    if (!$("#ticketModal").classList.contains("open")) openTicket();
+  } else if (entry.status === "rejected") {
+    S.t = "locked"; save(); renderVotes();
+    if ($("#ticketModal").classList.contains("open")) tkView("locked");
+    toast("The team couldn’t match your donation — double-check your receipt # or DM us 💬");
+  }
+}
+addEventListener("storage", e => { if (e.key === QKEY) checkQueue(); });
+setInterval(checkQueue, 3000);
+$("#simApprove").addEventListener("click", () => {
+  if (S.fb) {
+    const q = qload(), entry = q.find(x => x.fbId === S.fb.id);
+    if (entry) { entry.status = "approved"; entry.code = entry.code || genCode(); qsave(q); checkQueue(); return; }
+  }
+  unlock(S.name);
+});
+$("#tkStartVoting").addEventListener("click", () => { closeModals(); scrollToCats(); });
+function scrollToCats() { $("#categories").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" }); }
+
+/* ======================= watch modal ======================= */
+function openWatch(cat, nom) {
+  $("#watchTitle").textContent = nom.title;
+  $("#watchMeta").innerHTML = `${esc(nom.creator)} · ${fmtViews(nom.views)} views · ${esc(cat.label)}`;
+  $("#watchFbLink").href = nom.page ? `https://www.facebook.com/${nom.page}/videos/${nom.id}/` : nom.link;
+  const canonical = nom.page ? `https://www.facebook.com/${nom.page}/videos/${nom.id}/`
+                             : `https://www.facebook.com/watch/?v=${nom.id}`;
+  const href = encodeURIComponent(nom.link.includes("/videos/") ? nom.link : canonical);
+  $("#playerMount").innerHTML =
+    `<iframe src="https://www.facebook.com/plugins/video.php?href=${href}&show_text=false&autoplay=1&mute=0"
+       allow="autoplay; encrypted-media; picture-in-picture; web-share" allowfullscreen
+       title="${esc(nom.title)}"></iframe>`;
+  openModal("#watchModal");
+}
+
+/* ======================= modals ======================= */
+function openModal(sel) { $(sel).classList.add("open"); document.body.style.overflow = "hidden"; }
+function closeModals() {
+  $$(".modal.open").forEach(m => m.classList.remove("open"));
+  document.body.style.overflow = "";
+  $("#playerMount").innerHTML = "";   // stop playback
+}
+$$(".modal").forEach(m => m.addEventListener("click", e => {
+  if (e.target === m || e.target.closest("[data-close]")) {
+    if (m.id === "fbModal") closeFb(); else closeModals();
+  }
+}));
+addEventListener("keydown", e => {
+  if (e.key !== "Escape") return;
+  if ($("#fbModal").classList.contains("open")) closeFb(); else closeModals();
+});
+
+/* ======================= reveal + count-ups + meter ======================= */
+const io = new IntersectionObserver(es => es.forEach(en => {
+  if (!en.isIntersecting) return;
+  en.target.classList.add("in");
+  $$("[data-views]", en.target).forEach(v => {
+    if (v._done) return; v._done = true;
+    const target = +v.dataset.views;
+    if (reduceMotion) { v.textContent = "▶ " + fmtViews(target); return; }
+    const t0 = performance.now(), dur = 1100;
+    (function step(t) {
+      const k = Math.min(1,(t-t0)/dur), e2 = 1 - Math.pow(1-k,3);
+      v.textContent = "▶ " + fmtViews(Math.round(target*e2));
+      if (k<1) requestAnimationFrame(step);
+    })(t0);
+  });
+  io.unobserve(en.target);
+}), { threshold: .01, rootMargin: "0px 0px 300px 0px" });
+$$(".rv, .card").forEach(el => io.observe(el));
+
+/* hero stats + meter fire once on load */
+countUp($("#statCats"), +$("#statCats").dataset.target);
+countUp($("#statNoms"), +$("#statNoms").dataset.target);
+const meterIO = new IntersectionObserver(es => es.forEach(en => {
+  if (!en.isIntersecting) return;
+  $("#meterFill").style.width = Math.min(100, CONFIG.raised/CONFIG.goal*100) + "%";
+  const t0 = performance.now(), dur = 1400;
+  (function step(t){
+    const k = Math.min(1,(t-t0)/dur), e2 = 1-Math.pow(1-k,3);
+    $("#raisedTxt").textContent = fmtMoney(Math.round(CONFIG.raised*e2));
+    if (k<1 && !reduceMotion) requestAnimationFrame(step); else $("#raisedTxt").textContent = fmtMoney(CONFIG.raised);
+  })(t0);
+  meterIO.disconnect();
+}), { threshold:.4 });
+meterIO.observe($(".meter-card"));
+
+/* ======================= card tilt (desktop only) ======================= */
+if (finePointer && !reduceMotion) {
+  mount.addEventListener("pointermove", e => {
+    const card = e.target.closest(".card"); if (!card) return;
+    const r = card.getBoundingClientRect();
+    const rx = ((e.clientY - r.top)/r.height - .5) * -5;
+    const ry = ((e.clientX - r.left)/r.width - .5) * 5;
+    card.style.transform = `translateY(-5px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+  });
+  mount.addEventListener("pointerout", e => {
+    const card = e.target.closest(".card"); if (card) card.style.transform = "";
+  });
+}
+
+/* ======================= footer / misc ======================= */
+$("#ftWindow").textContent =
+  new Date(DATA.window.since+"T12:00:00").toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"}) +
+  " → " +
+  new Date(DATA.window.until+"T12:00:00").toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+$("#resetDemo").addEventListener("click", () => {
+  if (confirm("Reset the demo? Ticket, votes and the team queue in this browser will be cleared.")) {
+    localStorage.removeItem(KEY); localStorage.removeItem(QKEY); location.reload();
+  }
+});
+
+/* ======================= init ======================= */
+renderVotes();
+})();
+</script>
+</body>
+</html>

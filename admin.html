@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Team Console — Netty Awards 2026</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎟</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07070e; --panel:rgba(255,255,255,.045); --panel2:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.16);
+  --ink:#f4efe6; --dim:#a8a294; --faint:#6d6a60;
+  --gold1:#ffe9a3; --gold2:#e8b64c; --gold3:#a97e22; --gold4:#6b4d12;
+  --grad-gold:linear-gradient(105deg,#8a6116 0%,#e8b64c 30%,#fff3c4 50%,#e8b64c 70%,#8a6116 100%);
+  --green:#4ade80; --red:#ff5964;
+  --serif:"Fraunces",Georgia,serif; --sans:"Outfit",-apple-system,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.5;
+  background-image:radial-gradient(55% 40% at 50% -5%, rgba(232,182,76,.10), transparent 65%)}
+a{color:var(--gold1)}
+button{font-family:inherit;cursor:pointer}
+.goldtext{background:var(--grad-gold);-webkit-background-clip:text;background-clip:text;color:transparent}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:10;background:rgba(7,7,14,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.hud{display:flex;align-items:center;gap:12px;height:58px}
+.brand{font-weight:800;letter-spacing:.12em;font-size:13px;display:flex;gap:8px;align-items:center}
+.hud a.site{margin-left:auto;font-size:12.5px;font-weight:600;text-decoration:none;border:1px solid var(--line2);
+  border-radius:99px;padding:7px 14px;color:var(--ink)}
+.hud a.site:hover{border-color:var(--gold3)}
+.demo-tag{font-size:9.5px;font-weight:800;letter-spacing:.18em;color:#0e0c06;background:#e6d9ae;border-radius:4px;padding:2px 6px}
+h1{font-family:var(--serif);font-weight:900;font-size:clamp(28px,5vw,40px);margin-top:34px}
+.sub{color:var(--dim);margin-top:8px;font-size:14.5px;font-weight:300;max-width:640px}
+.banner{margin-top:20px;padding:13px 16px;border:1px solid #7a6a3a;border-radius:12px;background:rgba(232,182,76,.07);
+  font-size:13px;color:#e6d9ae}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+.stat{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:14px 18px}
+.stat .n{font-family:var(--serif);font-weight:900;font-size:28px}
+.stat .l{font-size:10.5px;letter-spacing:.18em;color:var(--faint);font-weight:700;margin-top:2px}
+section.card{border:1px solid var(--line);border-radius:16px;background:var(--panel);padding:22px 24px;margin-top:22px}
+section.card h2{font-family:var(--serif);font-weight:900;font-size:20px}
+ol.runbook{margin:14px 0 0 18px;display:flex;flex-direction:column;gap:10px;font-size:13.5px;color:var(--dim)}
+ol.runbook b{color:var(--ink)}
+textarea{width:100%;min-height:86px;margin-top:12px;background:rgba(255,255,255,.05);border:1px solid var(--line2);
+  border-radius:11px;color:var(--ink);padding:12px 14px;font-size:13px;font-family:inherit;resize:vertical}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:10px;
+  font-weight:700;font-size:12.5px;letter-spacing:.03em;padding:9px 15px;transition:.2s;text-decoration:none}
+.btn-gold{background:var(--grad-gold);color:#241703}
+.btn-gold:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,182,76,.35)}
+.btn-soft{border:1px solid var(--line2);background:var(--panel);color:var(--ink)}
+.btn-soft:hover{border-color:var(--gold3)}
+.btn-danger{border:1px solid rgba(255,89,100,.4);background:rgba(255,89,100,.08);color:#ff8a96}
+.btn-danger:hover{background:rgba(255,89,100,.16)}
+.queue{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+.req{border:1px solid var(--line);border-radius:14px;background:var(--panel2);padding:16px 18px}
+.req-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.av{width:40px;height:40px;border-radius:99px;background:#1877F2;color:#fff;font-weight:800;display:grid;
+  place-items:center;font-size:16px;flex:none}
+.req .who{font-weight:700;font-size:15px}
+.req .meta{font-size:11.5px;color:var(--faint)}
+.chip{font-size:10.5px;font-weight:700;letter-spacing:.08em;border-radius:99px;padding:4px 10px;white-space:nowrap}
+.chip.pending{background:rgba(232,182,76,.12);color:var(--gold1);border:1px solid var(--gold4)}
+.chip.approved{background:rgba(74,222,128,.1);color:var(--green);border:1px solid rgba(74,222,128,.35)}
+.chip.rejected{background:rgba(255,89,100,.1);color:#ff8a96;border:1px solid rgba(255,89,100,.35)}
+.chip.fbid{background:rgba(24,119,242,.12);color:#7ab5ff;border:1px solid rgba(24,119,242,.35);letter-spacing:0}
+.chip.receipt{background:rgba(255,255,255,.05);color:var(--dim);border:1px solid var(--line2);letter-spacing:.02em}
+.req-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.code{font-weight:800;color:var(--gold1);letter-spacing:.1em;background:rgba(232,182,76,.1);
+  border:1px dashed var(--gold4);border-radius:8px;padding:6px 12px;font-size:13px}
+.empty{padding:26px;text-align:center;color:var(--faint);font-size:13.5px;border:1px dashed var(--line2);border-radius:14px;margin-top:14px}
+.foot{display:flex;gap:10px;flex-wrap:wrap;margin:26px 0 60px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,80px);z-index:50;opacity:0;background:#15151f;
+  border:1px solid var(--gold4);color:var(--ink);font-size:13px;font-weight:600;border-radius:99px;padding:11px 20px;
+  transition:.35s;max-width:92vw;text-align:center}
+.toast.show{transform:translate(-50%,0);opacity:1}
+@media(max-width:640px){
+  .stats{grid-template-columns:1fr 1fr 1fr;gap:8px}
+  .stat{padding:11px 12px}.stat .n{font-size:22px}
+  section.card{padding:18px 16px}
+  .req-actions .btn{flex:1;min-width:130px}
+  .hud{gap:8px}
+  .brand{font-size:10.5px;letter-spacing:.06em;gap:6px}
+  .hud a.site{font-size:11px;padding:6px 10px;white-space:nowrap}
+}
+</style>
+</head>
+<body>
+
+<header><div class="wrap hud">
+  <span class="brand">🏆 <span class="goldtext">NETTY AWARDS ’26</span> · TEAM CONSOLE <span class="demo-tag">DEMO</span></span>
+  <a class="site" href="index.html">Open voting site →</a>
+</div></header>
+
+<main class="wrap">
+  <h1>Golden Ticket <span class="goldtext">queue</span></h1>
+  <p class="sub">Creators connect with Facebook on the voting site and request a ticket. Your job: confirm each
+    one against the fundraiser’s donor list, then approve — their ballot unlocks by itself.</p>
+
+  <div class="banner">🧪 <b>Demo mode:</b> requests live in this browser’s storage. Open the voting site in another
+    tab of <i>this same browser</i>, connect + request a ticket, and watch it appear here in real time. In production
+    this queue is a tiny database and works across all devices.</div>
+
+  <div class="stats">
+    <div class="stat"><div class="n goldtext" id="stPending">0</div><div class="l">PENDING</div></div>
+    <div class="stat"><div class="n" style="color:var(--green)" id="stApproved">0</div><div class="l">TICKETS ISSUED</div></div>
+    <div class="stat"><div class="n" style="color:#ff8a96" id="stRejected">0</div><div class="l">REJECTED</div></div>
+  </div>
+
+  <section class="card">
+    <h2>The runbook — issuing a ticket</h2>
+    <ol class="runbook">
+      <li><b>A request lands below</b> with the creator’s real Facebook identity (they logged in — it can’t be a
+        name someone copied off the donor list).</li>
+      <li><b>Open the fundraiser’s donor list</b> and find them:
+        <a href="https://www.facebook.com/donate/1932255517475401/" target="_blank" rel="noopener">St. Jude fundraiser ↗</a>.
+        As organizers we see every donor’s name. If they gave anonymously, ask for the Meta&nbsp;Pay receipt # —
+        it’s in their donation email and only the real donor has it.</li>
+      <li><b>Match found → Approve &amp; issue.</b> A single-use code is generated and their ballot unlocks
+        automatically on their device. No match → Reject (they’re told to double-check their receipt).</li>
+      <li><b>Optional DM</b> — send the congrats + code with the template below (the code matters only if they
+        vote on a different device than the one they requested from).</li>
+    </ol>
+    <textarea id="dmTemplate">🏆 You're verified for the 2026 Netty Awards! Your Golden Ticket code is {CODE} — your ballot is already unlocked, or punch the code in at {URL}. Voting closes Sept 6, winners live at the Netty Awards Show Sept 14. Thank you for giving to St. Jude ❤️</textarea>
+    <div style="margin-top:10px"><button class="btn btn-soft" id="copyTemplate">📋 Copy template</button></div>
+  </section>
+
+  <section class="card">
+    <h2>Requests</h2>
+    <div class="queue" id="queue"></div>
+    <div class="empty" id="empty" style="display:none">No requests yet. Open the voting site in another tab,
+      hit “Get your Golden Ticket” → Continue with Facebook → Request. It’ll pop up here instantly.</div>
+  </section>
+
+  <div class="foot">
+    <button class="btn btn-soft" id="seed">🧪 Seed 3 sample requests <span class="demo-tag">DEMO</span></button>
+    <button class="btn btn-danger" id="clear">Clear queue</button>
+  </div>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+"use strict";
+const QKEY = "netty26_queue";
+const $ = s => document.querySelector(s);
+const qload = () => { try { return JSON.parse(localStorage.getItem(QKEY)) || []; } catch (e) { return []; } };
+const qsave = q => localStorage.setItem(QKEY, JSON.stringify(q));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const genCode = () => "NM-" + String(Math.floor(1000 + Math.random()*9000));
+const siteUrl = () => location.href.replace(/admin\.html.*$/, "");
+const ago = ts => {
+  const m = Math.max(0, Math.round((Date.now() - ts) / 60000));
+  return m < 1 ? "just now" : m < 60 ? m + "m ago" : Math.round(m/60) + "h ago";
+};
+function toast(msg) {
+  const t = $("#toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove("show"), 2400);
+}
+
+function render() {
+  const q = qload().slice().sort((a,b) => (a.status === "pending" ? -1 : 1) - (b.status === "pending" ? -1 : 1) || b.ts - a.ts);
+  $("#stPending").textContent  = q.filter(x => x.status === "pending").length;
+  $("#stApproved").textContent = q.filter(x => x.status === "approved").length;
+  $("#stRejected").textContent = q.filter(x => x.status === "rejected").length;
+  $("#empty").style.display = q.length ? "none" : "";
+  $("#queue").innerHTML = q.map(r => `
+    <div class="req" data-id="${esc(r.fbId)}">
+      <div class="req-top">
+        <span class="av">${esc((r.fbName.trim()[0] || "?").toUpperCase())}</span>
+        <div style="min-width:0">
+          <div class="who">${esc(r.fbName)}</div>
+          <div class="meta">requested ${ago(r.ts)}</div>
+        </div>
+        <span class="chip fbid">FB ✓ ${esc(r.fbId)}</span>
+        <span class="chip receipt">${r.receipt ? "🧾 receipt " + esc(r.receipt) : "no receipt — match by name"}</span>
+        <span class="chip ${r.status}" style="margin-left:auto">${r.status.toUpperCase()}</span>
+      </div>
+      <div class="req-actions">
+        ${r.status === "pending" ? `
+          <a class="btn btn-soft" href="https://www.facebook.com/donate/1932255517475401/" target="_blank" rel="noopener">1 · Check donor list ↗</a>
+          <button class="btn btn-gold" data-approve>✅ 2 · Approve &amp; issue ticket</button>
+          <button class="btn btn-danger" data-reject>Reject</button>` : ""}
+        ${r.status === "approved" ? `
+          <span class="code">🎟 ${esc(r.code)}</span>
+          <button class="btn btn-soft" data-dm>📋 Copy DM with code</button>
+          <button class="btn btn-danger" data-revoke>Revoke</button>` : ""}
+        ${r.status === "rejected" ? `
+          <button class="btn btn-soft" data-approve>Approve after all</button>` : ""}
+      </div>
+    </div>`).join("");
+}
+
+$("#queue").addEventListener("click", async e => {
+  const card = e.target.closest(".req"); if (!card) return;
+  const q = qload(), r = q.find(x => x.fbId === card.dataset.id); if (!r) return;
+  if (e.target.closest("[data-approve]")) {
+    r.status = "approved"; r.code = r.code || genCode(); qsave(q); render();
+    toast(`Ticket ${r.code} issued to ${r.fbName} — their ballot just unlocked 🎟`);
+  } else if (e.target.closest("[data-reject]")) {
+    r.status = "rejected"; qsave(q); render();
+    toast(`${r.fbName} rejected — they’ll be asked to re-check their receipt`);
+  } else if (e.target.closest("[data-revoke]")) {
+    r.status = "rejected"; qsave(q); render();
+    toast(`Ticket revoked for ${r.fbName}`);
+  } else if (e.target.closest("[data-dm]")) {
+    const msg = $("#dmTemplate").value.replaceAll("{CODE}", r.code).replaceAll("{URL}", siteUrl());
+    try { await navigator.clipboard.writeText(msg); toast("DM copied — paste it into Messenger 📋"); }
+    catch (err) { prompt("Copy the DM:", msg); }
+  }
+});
+
+$("#copyTemplate").addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText($("#dmTemplate").value); toast("Template copied 📋"); }
+  catch (e) { /* textarea is selectable anyway */ }
+});
+$("#seed").addEventListener("click", () => {
+  const q = qload(), now = Date.now();
+  [["Jamie Rivera", "2417-8390-1146", 4], ["Olga P", "", 12], ["Marcus Lee", "9921-0034-7758", 26]]
+    .forEach(([n, rc, min]) => {
+      const id = "fb_" + n.toLowerCase().replace(/[^a-z0-9]+/g, "");
+      if (!q.find(x => x.fbId === id))
+        q.push({ fbId: id, fbName: n, receipt: rc, ts: now - min*60000, status: "pending", code: null });
+    });
+  qsave(q); render(); toast("3 sample requests added 🧪");
+});
+$("#clear").addEventListener("click", () => {
+  if (confirm("Clear the whole demo queue?")) { localStorage.removeItem(QKEY); render(); }
+});
+
+addEventListener("storage", e => { if (e.key === QKEY) { render(); toast("Queue updated — new activity from the voting site ⚡"); } });
+setInterval(render, 30000);  // keep "x min ago" fresh
+render();
+})();
+</script>
+</body>
+</html>
