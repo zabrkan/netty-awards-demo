@@ -563,9 +563,8 @@ footer .reset:hover{color:var(--red2)}
         <p>Give what feels right on our Facebook fundraiser. $5 or $500 — one donation is one Golden Ticket.</p></div>
       <div class="step rv"><span class="num">2</span><div class="ic">🎟</div>
         <h3>Claim your Golden Ticket</h3>
-        <p>Connect with Facebook so we know it’s really you — no password, no posting rights, and no way to
-        impersonate another donor. Our team matches your identity against the donor list and your ballot
-        unlocks automatically.</p></div>
+        <p>Give us your name and the receipt number Facebook emailed you when you donated. Only the real donor
+        has that number, so nobody can claim your gift. Our team confirms it and your ballot unlocks.</p></div>
       <div class="step rv"><span class="num">3</span><div class="ic">🗳</div>
         <h3>Vote in every category</h3>
         <p>Punch your ticket, back your favorites, seal your ballot. Winners are revealed live at the Netty&nbsp;Awards&nbsp;Show on September&nbsp;14.</p></div>
@@ -645,40 +644,28 @@ footer .reset:hover{color:var(--red2)}
       <div class="tk-actions" style="margin-top:22px">
         <a class="btn btn-donate" id="tkDonate" target="_blank" rel="noopener">❤️ Step 1 · Donate on Facebook ↗</a>
       </div>
-      <div class="tk-or">STEP 2 · PROVE IT’S YOU</div>
+      <div class="tk-or">STEP 2 · CONFIRM YOUR DONATION</div>
       <div class="tk-form">
-        <div id="fbConnectRow">
-          <button class="btn btn-fb" id="fbConnect"><span class="f">f</span> Continue with Facebook</button>
-          <p class="tk-hint" style="margin-top:8px;text-align:left">We only receive your public name and photo — never your
-            password, never posting rights. Nobody can “Continue” as you, so nobody can claim your donation.
-            <b>Demo: no real Facebook connection is made.</b></p>
-        </div>
-        <div id="fbConnectedRow" style="display:none">
-          <div class="fb-id">
-            <span class="fb-av" id="fbAv">?</span>
-            <div style="min-width:0">
-              <div style="font-weight:700" id="fbWho">—</div>
-              <div style="font-size:11px;color:var(--dim)">Connected with Facebook ·
-                <button class="linklike" id="fbSwitch">switch account</button></div>
-            </div>
-            <span style="margin-left:auto;color:#4ade80;font-weight:700;font-size:13px">✓</span>
-          </div>
+        <div>
+          <label for="tkName">Your name</label>
+          <input id="tkName" type="text" placeholder="Name on your donation" autocomplete="name">
         </div>
         <div>
-          <label for="tkReceipt">Meta Pay receipt # <span style="opacity:.6;text-transform:none;letter-spacing:0">(optional — speeds up matching; use it if you donated anonymously)</span></label>
+          <label for="tkReceipt">Donation receipt #</label>
           <input id="tkReceipt" type="text" placeholder="e.g. 2417-8390-1146" autocomplete="off">
+          <p class="tk-hint" style="margin-top:7px;text-align:left">🔒 Facebook emails you this number the moment you donate.
+            Only you have it — it’s how we confirm the donation is really yours.</p>
         </div>
         <div class="tk-actions">
           <button class="btn btn-gold" id="tkRequest" style="flex:1">🎟 Step 3 · Request my Golden Ticket</button>
         </div>
         <div class="tk-or">GOT A CODE FROM THE TEAM?</div>
         <div>
-          <label for="tkCode">Golden Ticket code</label>
-          <input id="tkCode" type="text" placeholder="NM-XXXX" autocomplete="off">
+          <input id="tkCode" type="text" placeholder="NM-XXXX" autocomplete="off" aria-label="Golden Ticket code">
           <p class="tk-error" id="tkError">Hmm, that code doesn’t match. Check your DMs — or request a ticket above.</p>
         </div>
         <div class="tk-actions">
-          <button class="btn btn-soft" id="tkRedeem" style="flex:1">Punch my ticket</button>
+          <button class="btn btn-soft" id="tkRedeem" style="flex:1">Punch my code</button>
         </div>
         <p class="tk-hint">Demo build: code <code>NETTY26</code> unlocks instantly · the team side lives in the
           <a href="admin.html" target="_blank" style="color:var(--gold1)">Team Console</a>.</p>
@@ -689,9 +676,9 @@ footer .reset:hover{color:var(--red2)}
       <h3>Checking the list <span class="goldtext">twice</span></h3>
       <div class="pending-box">
         <div class="big">🕵️</div>
-        <p><b id="pendingName">Your name</b> is in the team’s queue. They’re matching your Facebook identity
-          against the fundraiser’s donor list — the moment it checks out, your ballot <b>unlocks right here,
-          automatically</b>. Usually within a few hours.</p>
+        <p><b id="pendingName">Your name</b> is in the team’s queue. They’re confirming your receipt against
+          the fundraiser — the moment it checks out, your ballot <b>unlocks right here, automatically</b>.
+          Usually within a few hours.</p>
         <p style="font-size:12px;color:var(--faint);margin-top:12px">Testing the team side? Open the
           <a href="admin.html" target="_blank" style="color:var(--gold1)">Team Console</a> in a new tab and
           approve this request — watch this page react.</p>
@@ -745,32 +732,6 @@ footer .reset:hover{color:var(--red2)}
     <div class="tk-actions" style="margin-top:22px">
       <button class="btn btn-gold" id="copyShare">📋 Copy share text</button>
       <a class="btn btn-donate" id="sealDonate" target="_blank" rel="noopener">❤️ Give again</a>
-    </div>
-  </div>
-</div>
-
-<!-- ================= MOCK FACEBOOK LOGIN (DEMO) ================= -->
-<div class="modal" id="fbModal" role="dialog" aria-modal="true" aria-label="Facebook Login demo">
-  <div class="sheet" style="width:min(430px,100%);padding:0;overflow:hidden">
-    <div class="fb-bar"><span class="fb-logo">f</span> Log in with Facebook
-      <span class="demo-tag" style="margin-left:auto">DEMO</span></div>
-    <div style="padding:24px 26px 26px">
-      <p style="font-weight:700;font-size:16px">The Netty Awards wants to:</p>
-      <ul class="fb-perms">
-        <li>👤 Receive your name and profile picture</li>
-      </ul>
-      <div class="tk-form">
-        <div>
-          <label for="fbName">Your Facebook name <span style="opacity:.6;text-transform:none;letter-spacing:0">(type anything — this is a mock)</span></label>
-          <input id="fbName" type="text" placeholder="e.g. Jamie Rivera" autocomplete="off">
-        </div>
-        <div class="tk-actions">
-          <button class="btn btn-fb" id="fbContinue" style="flex:1">Continue</button>
-          <button class="btn btn-soft" id="fbCancel">Cancel</button>
-        </div>
-        <p class="tk-hint">Mock of Facebook Login for flow testing — nothing touches Facebook. In production this
-          is the real FB Login dialog and identity can’t be faked.</p>
-      </div>
     </div>
   </div>
 </div>
@@ -1116,7 +1077,7 @@ $("#copyShare").addEventListener("click", async () => {
 /* ======================= golden ticket flow ======================= */
 function tkView(v) {
   $$("#ticketModal [data-tkview]").forEach(x => x.style.display = x.dataset.tkview === v ? "" : "none");
-  if (v === "locked") renderFbRows();
+  if (v === "locked") { if (S.name) $("#tkName").value = S.name; if (S.receipt) $("#tkReceipt").value = S.receipt; }
   if (v === "unlocked") {
     $("#tkNoTxt").textContent = "№ " + S.no;
     $("#tkNameTxt").textContent = S.name || "Golden Ticket holder";
@@ -1135,34 +1096,12 @@ function unlock(name, code) {
   toast(`Golden Ticket ${S.no} punched 🎟 — happy voting!`);
 }
 
-/* --- mock Facebook Login: proves IDENTITY; matching to the donor list stays
-       with the team (FB exposes no fundraiser-donations API) --- */
+/* --- name + receipt verification: the receipt # is the private proof (only
+       the real donor has it). Matching to the fundraiser stays with the team
+       (Facebook exposes no fundraiser-donations API). --- */
 const QKEY = "netty26_queue";
 const qload = () => { try { return JSON.parse(localStorage.getItem(QKEY)) || []; } catch (e) { return []; } };
 const qsave = q => localStorage.setItem(QKEY, JSON.stringify(q));
-function renderFbRows() {
-  $("#fbConnectRow").style.display = S.fb ? "none" : "";
-  $("#fbConnectedRow").style.display = S.fb ? "" : "none";
-  if (S.fb) { $("#fbWho").textContent = S.fb.name; $("#fbAv").textContent = S.fb.name.trim()[0].toUpperCase(); }
-}
-function openFb() { $("#fbName").value = S.fb ? S.fb.name : ""; openModal("#fbModal"); $("#fbName").focus(); }
-function closeFb() {
-  $("#fbModal").classList.remove("open");
-  if (!$(".modal.open")) document.body.style.overflow = "";
-}
-$("#fbConnect").addEventListener("click", openFb);
-$("#fbSwitch").addEventListener("click", openFb);
-$("#fbCancel").addEventListener("click", closeFb);
-$("#fbContinue").addEventListener("click", () => {
-  const name = $("#fbName").value.trim();
-  if (!name) { $("#fbName").focus(); return; }
-  S.fb = { name, id: "fb_" + name.toLowerCase().replace(/[^a-z0-9]+/g, "") };
-  save(); closeFb(); renderFbRows();
-  toast(`Connected as ${name} ✓ — identity locked in`);
-});
-$("#fbName").addEventListener("keydown", e => {
-  if (e.key === "Enter" || e.code === "Enter" || e.keyCode === 13) { e.preventDefault(); $("#fbContinue").click(); }
-});
 
 $("#ticketChip").addEventListener("click", openTicket);
 $("#heroTicket").addEventListener("click", () => S.t === "unlocked" ? scrollToCats() : openTicket());
@@ -1171,39 +1110,41 @@ $("#tkRedeem").addEventListener("click", () => {
   const code = $("#tkCode").value.trim().toUpperCase();
   if (code && (code === CONFIG.demoCode || /^NM-\d{4}$/.test(code))) {
     $("#tkError").classList.remove("show");
-    unlock(S.fb ? S.fb.name : S.name, /^NM-\d{4}$/.test(code) ? code : null);
+    unlock(S.name || $("#tkName").value.trim(), /^NM-\d{4}$/.test(code) ? code : null);
   } else {
     $("#tkError").classList.add("show");
   }
 });
-["tkReceipt","tkCode"].forEach(id => $("#"+id).addEventListener("keydown", e => {
+["tkName","tkReceipt","tkCode"].forEach(id => $("#"+id).addEventListener("keydown", e => {
   if (e.key !== "Enter" && e.code !== "Enter" && e.keyCode !== 13) return;
   e.preventDefault();
   ($("#tkCode").value.trim() ? $("#tkRedeem") : $("#tkRequest")).click();
 }));
 $("#tkRequest").addEventListener("click", () => {
-  if (!S.fb) { openFb(); toast("Connect with Facebook first — that’s your proof of identity 🔐"); return; }
+  const name = $("#tkName").value.trim();
   const receipt = $("#tkReceipt").value.trim();
+  if (!name) { toast("Add your name so the team can find your donation 🙏"); $("#tkName").focus(); return; }
+  if (!receipt) { toast("Add the receipt # from your donation email 🧾"); $("#tkReceipt").focus(); return; }
+  if (!S.reqId) S.reqId = "req_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
   const q = qload();
-  let entry = q.find(x => x.fbId === S.fb.id);
+  let entry = q.find(x => x.id === S.reqId);
   if (!entry) {
-    entry = { fbId: S.fb.id, fbName: S.fb.name, receipt, ts: Date.now(), status: "pending", code: null };
+    entry = { id: S.reqId, name, receipt, ts: Date.now(), status: "pending", code: null };
     q.push(entry);
   } else {
-    entry.fbName = S.fb.name;
-    if (receipt) entry.receipt = receipt;
+    entry.name = name; entry.receipt = receipt;
     if (entry.status === "rejected") entry.status = "pending";
   }
   qsave(q);
-  S.t = "pending"; S.name = S.fb.name; S.receipt = receipt; save(); renderHud(); tkView("pending");
+  S.t = "pending"; S.name = name; S.receipt = receipt; save(); renderHud(); tkView("pending");
 });
 /* the ballot unlocks the moment the team approves — storage events make it live across tabs */
 function checkQueue() {
-  if (!S.fb || S.t !== "pending") return;
-  const entry = qload().find(x => x.fbId === S.fb.id);
+  if (!S.reqId || S.t !== "pending") return;
+  const entry = qload().find(x => x.id === S.reqId);
   if (!entry) return;
   if (entry.status === "approved") {
-    unlock(entry.fbName, entry.code);
+    unlock(entry.name, entry.code);
     if (!$("#ticketModal").classList.contains("open")) openTicket();
   } else if (entry.status === "rejected") {
     S.t = "locked"; save(); renderVotes();
@@ -1214,10 +1155,8 @@ function checkQueue() {
 addEventListener("storage", e => { if (e.key === QKEY) checkQueue(); });
 setInterval(checkQueue, 3000);
 $("#simApprove").addEventListener("click", () => {
-  if (S.fb) {
-    const q = qload(), entry = q.find(x => x.fbId === S.fb.id);
-    if (entry) { entry.status = "approved"; entry.code = entry.code || genCode(); qsave(q); checkQueue(); return; }
-  }
+  const q = qload(), entry = q.find(x => x.id === S.reqId);
+  if (entry) { entry.status = "approved"; entry.code = entry.code || genCode(); qsave(q); checkQueue(); return; }
   unlock(S.name);
 });
 $("#tkStartVoting").addEventListener("click", () => { closeModals(); scrollToCats(); });
@@ -1252,14 +1191,9 @@ function closeModals() {
   $("#playerMount").innerHTML = "";   // stop playback
 }
 $$(".modal").forEach(m => m.addEventListener("click", e => {
-  if (e.target === m || e.target.closest("[data-close]")) {
-    if (m.id === "fbModal") closeFb(); else closeModals();
-  }
+  if (e.target === m || e.target.closest("[data-close]")) closeModals();
 }));
-addEventListener("keydown", e => {
-  if (e.key !== "Escape") return;
-  if ($("#fbModal").classList.contains("open")) closeFb(); else closeModals();
-});
+addEventListener("keydown", e => { if (e.key === "Escape") closeModals(); });
 
 /* ======================= reveal + count-ups + meter ======================= */
 const io = new IntersectionObserver(es => es.forEach(en => {

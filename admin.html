@@ -96,11 +96,11 @@ textarea{width:100%;min-height:86px;margin-top:12px;background:rgba(255,255,255,
 
 <main class="wrap">
   <h1>Golden Ticket <span class="goldtext">queue</span></h1>
-  <p class="sub">Creators connect with Facebook on the voting site and request a ticket. Your job: confirm each
-    one against the fundraiser’s donor list, then approve — their ballot unlocks by itself.</p>
+  <p class="sub">Donors enter their name and receipt number on the voting site and request a ticket. Your job:
+    confirm each one against the fundraiser’s donor list, then approve — their ballot unlocks by itself.</p>
 
   <div class="banner">🧪 <b>Demo mode:</b> requests live in this browser’s storage. Open the voting site in another
-    tab of <i>this same browser</i>, connect + request a ticket, and watch it appear here in real time. In production
+    tab of <i>this same browser</i>, request a ticket, and watch it appear here in real time. In production
     this queue is a tiny database and works across all devices.</div>
 
   <div class="stats">
@@ -112,12 +112,12 @@ textarea{width:100%;min-height:86px;margin-top:12px;background:rgba(255,255,255,
   <section class="card">
     <h2>The runbook — issuing a ticket</h2>
     <ol class="runbook">
-      <li><b>A request lands below</b> with the creator’s real Facebook identity (they logged in — it can’t be a
-        name someone copied off the donor list).</li>
-      <li><b>Open the fundraiser’s donor list</b> and find them:
+      <li><b>A request lands below</b> with the donor’s name and their <b>receipt number</b> — the private
+        number Facebook emails only the person who donated.</li>
+      <li><b>Open the fundraiser’s donor list</b> and confirm the donation:
         <a href="https://www.facebook.com/donate/1932255517475401/" target="_blank" rel="noopener">St. Jude fundraiser ↗</a>.
-        As organizers we see every donor’s name. If they gave anonymously, ask for the Meta&nbsp;Pay receipt # —
-        it’s in their donation email and only the real donor has it.</li>
+        As organizers we see every donor’s name and amount; the receipt # is the proof it’s really them (and
+        covers anonymous gifts, where the name won’t show on the list).</li>
       <li><b>Match found → Approve &amp; issue.</b> A single-use code is generated and their ballot unlocks
         automatically on their device. No match → Reject (they’re told to double-check their receipt).</li>
       <li><b>Optional DM</b> — send the congrats + code with the template below (the code matters only if they
@@ -131,7 +131,7 @@ textarea{width:100%;min-height:86px;margin-top:12px;background:rgba(255,255,255,
     <h2>Requests</h2>
     <div class="queue" id="queue"></div>
     <div class="empty" id="empty" style="display:none">No requests yet. Open the voting site in another tab,
-      hit “Get your Golden Ticket” → Continue with Facebook → Request. It’ll pop up here instantly.</div>
+      hit “Get your Golden Ticket” → enter a name + receipt # → Request. It’ll pop up here instantly.</div>
   </section>
 
   <div class="foot">
@@ -168,15 +168,14 @@ function render() {
   $("#stRejected").textContent = q.filter(x => x.status === "rejected").length;
   $("#empty").style.display = q.length ? "none" : "";
   $("#queue").innerHTML = q.map(r => `
-    <div class="req" data-id="${esc(r.fbId)}">
+    <div class="req" data-id="${esc(r.id)}">
       <div class="req-top">
-        <span class="av">${esc((r.fbName.trim()[0] || "?").toUpperCase())}</span>
+        <span class="av">${esc((r.name.trim()[0] || "?").toUpperCase())}</span>
         <div style="min-width:0">
-          <div class="who">${esc(r.fbName)}</div>
+          <div class="who">${esc(r.name)}</div>
           <div class="meta">requested ${ago(r.ts)}</div>
         </div>
-        <span class="chip fbid">FB ✓ ${esc(r.fbId)}</span>
-        <span class="chip receipt">${r.receipt ? "🧾 receipt " + esc(r.receipt) : "no receipt — match by name"}</span>
+        <span class="chip receipt">${r.receipt ? "🧾 receipt " + esc(r.receipt) : "no receipt given"}</span>
         <span class="chip ${r.status}" style="margin-left:auto">${r.status.toUpperCase()}</span>
       </div>
       <div class="req-actions">
@@ -196,16 +195,16 @@ function render() {
 
 $("#queue").addEventListener("click", async e => {
   const card = e.target.closest(".req"); if (!card) return;
-  const q = qload(), r = q.find(x => x.fbId === card.dataset.id); if (!r) return;
+  const q = qload(), r = q.find(x => x.id === card.dataset.id); if (!r) return;
   if (e.target.closest("[data-approve]")) {
     r.status = "approved"; r.code = r.code || genCode(); qsave(q); render();
-    toast(`Ticket ${r.code} issued to ${r.fbName} — their ballot just unlocked 🎟`);
+    toast(`Ticket ${r.code} issued to ${r.name} — their ballot just unlocked 🎟`);
   } else if (e.target.closest("[data-reject]")) {
     r.status = "rejected"; qsave(q); render();
-    toast(`${r.fbName} rejected — they’ll be asked to re-check their receipt`);
+    toast(`${r.name} rejected — they’ll be asked to re-check their receipt`);
   } else if (e.target.closest("[data-revoke]")) {
     r.status = "rejected"; qsave(q); render();
-    toast(`Ticket revoked for ${r.fbName}`);
+    toast(`Ticket revoked for ${r.name}`);
   } else if (e.target.closest("[data-dm]")) {
     const msg = $("#dmTemplate").value.replaceAll("{CODE}", r.code).replaceAll("{URL}", siteUrl());
     try { await navigator.clipboard.writeText(msg); toast("DM copied — paste it into Messenger 📋"); }
@@ -219,11 +218,11 @@ $("#copyTemplate").addEventListener("click", async () => {
 });
 $("#seed").addEventListener("click", () => {
   const q = qload(), now = Date.now();
-  [["Jamie Rivera", "2417-8390-1146", 4], ["Olga P", "", 12], ["Marcus Lee", "9921-0034-7758", 26]]
+  [["Jamie Rivera", "2417-8390-1146", 4], ["Olga P", "5560-1182-4471", 12], ["Marcus Lee", "9921-0034-7758", 26]]
     .forEach(([n, rc, min]) => {
-      const id = "fb_" + n.toLowerCase().replace(/[^a-z0-9]+/g, "");
-      if (!q.find(x => x.fbId === id))
-        q.push({ fbId: id, fbName: n, receipt: rc, ts: now - min*60000, status: "pending", code: null });
+      const id = "seed_" + n.toLowerCase().replace(/[^a-z0-9]+/g, "");
+      if (!q.find(x => x.id === id))
+        q.push({ id, name: n, receipt: rc, ts: now - min*60000, status: "pending", code: null });
     });
   qsave(q); render(); toast("3 sample requests added 🧪");
 });
